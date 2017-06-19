@@ -12,8 +12,8 @@ function getScore(form) {
     var currQuestion = document.getElementById("question").innerHTML;
     var correctAnswer;
     var form = document.getElementById(form);
-    for (q=0; q < questions.length; q++) {
-        if (currQuestion === questions[q]) {
+    for (q=0; q < Q_Array.length; q++) {
+        if (currQuestion === Q_Array[q]) {
             correctAnswer = q;
             break;
         }
@@ -26,7 +26,7 @@ function getScore(form) {
             if (currSelection.checked) {
                 answered=true;
                 var edit= document.getElementById("edit");
-                if (currSelection.value === answers[correctAnswer]) {
+                if (currSelection.value === A_Array[correctAnswer]) {
                     score++;
                     edit.innerHTML = "Good Job";
                     break;
