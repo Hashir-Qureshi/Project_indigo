@@ -1,14 +1,17 @@
 
-var numQues = 1;
+var numQues = 5;
 var numChoi = 4;
 var questions = ["How old is Joshua","How old is Hashir","How old is Harpreet","How old is Fedora","How old is Mr Cosby"];
-var answers = ["21","23","20","19","79"];
+var answers = ["21","22","20","19","79"];
+var Q_Array = ["How old is Joshua","How old is Hashir","How old is Harpreet","How old is Fedora","How old is Mr Cosby"];
+var A_Array = ["21","22","20","19","79"];
 function getScore(form) {
     var score = 0;
     var currElt;
     var currSelection;
-    var currQuestion = document.getElementById("Question").innerHTML;
+    var currQuestion = document.getElementById("question").innerHTML;
     var correctAnswer;
+    var form = document.getElementById(form);
     for (q=0; q < questions.length; q++) {
         if (currQuestion === questions[q]) {
             correctAnswer = q;
@@ -17,25 +20,20 @@ function getScore(form) {
     }
     for (i=0; i<numQues; i++) {
         currElt = i*numChoi;
-        answered=true;
+        var answered=true;
         for (j=0; j<numChoi; j++) {
             currSelection = form.elements[currElt + j];
             if (currSelection.checked) {
                 answered=true;
+                var edit= document.getElementById("edit");
                 if (currSelection.value === answers[correctAnswer]) {
                     score++;
+                    edit.innerHTML = "Good Job";
                     break;
 
-                }
+                }else edit.innerHTML = "Try Again";
             }
-            if (currSelection.checked) {
-                answered=true;
-                    var edit= document.getElementById("edit");
-                if (currSelection.value === answers[correctAnswer]) {
-                    edit.innerHTML = "Good Job";
-                    //work on the edit.innerHTML = "Good Job"; not outputting results
-                } else edit.innerHTML = "Try Again";
-            }
+
         }
         if (answered === false){alert("Do answer all the questions, Please") ;return false;}
     }
@@ -45,9 +43,10 @@ function getScore(form) {
     form.mark.value=score;
 
 }
+
 function generate(Ques,ans) {
     var Q_Array = ["How old is Joshua","How old is Hashir","How old is Harpreet","How old is Fedora","How old is Mr Cosby"];
-    var A_Array = ["21","23","20","19","79"];
+    var A_Array = ["21","22","20","19","79"];
     var work_Array = A_Array.slice();
 
     var Q_index = Math.floor(Math.random() * (Q_Array.length));
@@ -69,8 +68,8 @@ function generate(Ques,ans) {
         work_Array.splice(A_index, 1);
     }
 
-    var buttonGeneration = choice_Array.length;
-    for (var i = 0; i < buttonGeneration; i++) {
+
+    for (var i = 0; i < 4; i++) {
         A_index = Math.floor(Math.random() * (choice_Array.length));
         answ.innerHTML = answ.innerHTML + "<input type = 'radio' name=()+Q_Array[Q_index]+( value =" + choice_Array[A_index] + ">"
             + choice_Array[A_index] + "<br>";
