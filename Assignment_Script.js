@@ -45,10 +45,12 @@ function getScore(form) {
 function generate(Ques,ans) {
     $.ajax({
         url: 'assignment.php',
+        data:'',
+        datatype: 'json',
         success: function(output) {
             var result = $.parseJSON(output);
 
-            var question = result[0];
+            var question =result[0];
             var work_Array= result[1];
 
             var Quest = document.getElementById(Ques);
@@ -57,7 +59,7 @@ function generate(Ques,ans) {
             var answ = document.getElementById(ans);
 
             for (var i = 0; i < 4; i++) {
-                A_index = Math.floor(Math.random() * (work_Array.length));
+               var A_index = Math.floor(Math.random() * (work_Array.length));
                 answ.innerHTML = answ.innerHTML + "<input type = 'radio' name=()+question+( value =" + work_Array[A_index] + ">"
                     + work_Array[A_index] + "<br>";
                 work_Array.splice(A_index, 1);
