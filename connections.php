@@ -2,14 +2,9 @@
 //Using the Login_info.php that has the login credentials
 require_once 'Login_info.php';
 
-//Declaring the global variables to use from Login_info.php
-global $servername;
-global $username;
-global $password;
-global $dbname;
-
-//Creating a connection object that will be used to connect to the database anytime we need to.
-$conn = new mysqli($servername, $username, $password, $dbname);
+//Declaring the global variables to use from Login_info.phpwe need to declare global if we want to use a variable in
+// a different file.
+global $conn;
 
 //Getting the number of questions in the table
 $num_Questions = $conn->query("SELECT COUNT(*) FROM ch_1");
