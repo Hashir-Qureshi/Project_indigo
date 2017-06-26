@@ -5,10 +5,11 @@
     <title> Assignment </title>
 </head>
 <body id="edit" onload="generate('question','answers')">
-<div style="margin:auto; width:20%; border: 3px solid #73AD21; text-align: center;" ><?php question();?>
+<div style="margin:auto; width:20%; border: 3px solid #73AD21; text-align: center;">
+    <?php outputQuestion();?>
 <form id="myForm" action="assignment.php" method="post">
     <div id="answers" style="text-align: left;">
-        <?php answers();?>
+        <?php outputAnswers();?>
     </div></br>
     <input type="button" value="Grade Me" onClick="getScore(this.form);"><br>
     <table style="margin: auto">
@@ -23,4 +24,5 @@
 </form>
 </div>
 </body>
+</html>
 
