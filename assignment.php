@@ -10,7 +10,16 @@
     <div id="answers" style="text-align: left;">
         <?php answers();?>
     </div></br>
-    <input type="button" onclick="getScore('myForm')"value="Grade Me!">
+    <input type="button" value="Grade Me" onClick="getScore(this.form);"><br>
+    <table style="margin: auto">
+        <tr>
+            <td align="right"> Score out of 1 = </td>
+            <td align="left"> <input type= text size=4 name= "mark"><br> </td>
+        </tr>
+        <tr>
+            <td align="right"> Score in percentage = </td>
+            <td align="left" > <input type=text size=4 name="percentage"><br> </td>
+    </table>
 </form>
 </div>
 </body>

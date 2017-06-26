@@ -8,9 +8,10 @@ function question(){
 
 function answers(){
     global $results;
+    global $question;
     for($i =0;$i<4;$i++){
         $A_index = rand(0,sizeof($results)-1);
-        echo "<input type='radio' name='question_1' value=$results[$A_index]>$results[$A_index]</br>";
+        echo "<input type='radio' name='answer' value=$results[$A_index]>$results[$A_index]</br>";
         unset($results[$A_index]);
         $results = array_values($results);
     }
