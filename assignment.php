@@ -1,38 +1,20 @@
 <?php session_start();
-require 'Functions.php';
 
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title> Assignment </title>
-</head>
-<body id="edit">
-<?php
+$_SESSION['usedQuestions'] = array();
+
+$_SESSION['MaxQuestions'] = 5;
+
+$_SESSION['try']=0;
+
+$_SESSION['status'] = "";
+
 
 $chapters = array('ch_1','ch_2','ch_3');
-if(!empty($_POST['choice'])){
-    $choice = $_POST['choice'];
-    if($choice == 1) {
+if(!empty($_POST['choice'])) {
+    $_SESSION['choice'] = $_POST['choice'];
+    if($_SESSION['choice'] == 1) {
         $_SESSION['chapters'] = $chapters;
- echo  '<div style="margin:auto; width:20%; border: 3px solid indigo; text-align: center;">';
-
-    question();
-
-    echo '<form id="myForm" action="Validation.php" method="post">';
- echo '<div id="answers" style="text-align: left;">';
-
-
-    answers();
-
- echo <<<_END
-    </div></br>
-    <input type="submit" name="check" value="Grade Me!">
-</form>
-</div>
-</body>
-</html>
-_END;
+        require 'Assignment_1.php';
     }
 }
 
@@ -40,6 +22,5 @@ _END;
 
 
 
-?>
 
 
