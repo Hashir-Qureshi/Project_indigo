@@ -1,4 +1,5 @@
 <?php require 'Functions.php';
+session_start();
 if(isset($_SESSION['usedQuestions']) && ($_SESSION['try'] != 1)) query();
 ?>
 <!DOCTYPE html>
@@ -15,7 +16,6 @@ if(isset($_SESSION['usedQuestions']) && ($_SESSION['try'] != 1)) query();
             <?php answers(); ?>
         </div></br>
         <input type="submit" name="check" value="Grade Me!">
-        <input type="submit" name="change" value="Next Question">
     </form>
 </div>
 <span> <?php echo $_SESSION['status']; ?> </span>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testing AJAX</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var btn = document.getElementById('btn');
+            // process the form
+            $('form').submit(function(event) {
+
+                // get the form data
+                var formData = {
+                    'answer'              : $('input[name=answer]:checked').val()
+                };
+
+                // process the form
+                $.ajax({
+                    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url         : 'Test.php', // the url where we want to POST
+                    data        : formData, // our data object
+                    dataType    : 'json', // what type of data do we expect back from the server
+                    encode          : true
+                })
+                    .done(function(data) {
+                        // log data to the console so we can see
+
+                        // here we will handle errors and validation messages
+                        if(data.check){
+                            btn.style.color = "green";
+                        }else btn.style.color = "red";
+
+                    });
+
+                // stop the form from submitting the normal way and refreshing the page
+                event.preventDefault();
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+<form id="form" action="Test.php" method="post">
+    <input type="radio" name="answer" value="1">1</br>
+    <input type="radio" name="answer" value="2">2</br>
+    <input id="btn" type="submit" value="Check">
+</form>
+<div></div>
+</body>
+</html>

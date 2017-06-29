@@ -1,4 +1,6 @@
 <?php require_once "Login_info.php";
+//session_start();
+
 
 
 function question(){

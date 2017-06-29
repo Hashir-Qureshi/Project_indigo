@@ -12,30 +12,30 @@ if(!empty($_POST['check'])) {
             $_SESSION['score'] += 1;
         }
         if(sizeof($_SESSION['usedQuestions']) != 5){
-            require 'Assignment_1.php';
+            header('location: Assignment_1.php');
+            exit;
         }else{
-            echo "<h1> YOU HAVE COMPLETED THE ASSIGNMENT ".$_SESSION['choice'];
-            require 'hub.php';
+            header('location: Confirmation.php');
+            exit;
         }
 
     }else {
         if($_SESSION['try'] == 0) {
             $_SESSION['try'] = 1;
             $_SESSION['status'] = "Wrong! Try 1 more time for .75 points";
-            require 'Assignment_1.php';
+            header('location: Assignment_1.php');
+            exit;
         }else {
-            $_SESSION['try'] = 0;
-            $_SESSION['status'] = "";
-            require 'Assignment_1.php';
+            if(sizeof($_SESSION['usedQuestions']) != 5){
+                $_SESSION['try'] = 0;
+                $_SESSION['status'] = "";
+                header( 'location: Assignment_1.php');
+                exit;
+            }else {
+                header('location: hub.php');
+                exit;
+            }
+
         }
-    }
-}
-if(isset($_POST['change'])){
-    if(sizeof($_SESSION['usedQuestions']) != 5) {
-        require 'Assignment_1.php';
-        echo sizeof($_SESSION['usedQuestions']);
-    }else{
-        echo "<h1> YOU HAVE COMPLETED THE ASSIGNMENT ".$_SESSION['choice'];
-        require 'hub.php';
     }
 }

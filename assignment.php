@@ -8,13 +8,15 @@ $_SESSION['try']=0;
 
 $_SESSION['status'] = "";
 
+$_SESSION['score'] = 0;
+
 
 $chapters = array('ch_1','ch_2','ch_3');
 if(!empty($_POST['choice'])) {
     $_SESSION['choice'] = $_POST['choice'];
     if($_SESSION['choice'] == 1) {
         $_SESSION['chapters'] = $chapters;
-        require 'Assignment_1.php';
+        header('location: Assignment_1.php');
     }
 }
 
