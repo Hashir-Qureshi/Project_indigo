@@ -1,35 +1,60 @@
-<?php
-//Requiring the connections.php file to create functions using its variables
-require 'connections.php';
+<?php require_once "Login_info.php";
+//session_start();
 
-//Function to echo a heading with the question retrieved from connections.php
-function outputQuestion(){
-    //We have to declare that we are using the global variable that was declared in connections.php
-    global $question;
-    echo "<h2 id='question_1'> $question[0]</h2>";
+
+
+function question(){
+    echo "<h2 id='question_1'>". $_SESSION['question'][0]."</h2>";
 }
 
-//Function to echo the answer choices randomly
-function outputAnswers(){
-    //The answers array from connections.php contains the correct answer and the wrong answer choices for that question.
-    global $answers;
+function answers(){
+    $answers = $_SESSION['answers'];
     for($i =0;$i<4;$i++){
-        //Choosing a random index between 0 and the length of the answers array
-        //We subtract 1 from the size because the rand() function includes the max but we don't want that
-        //as it will overextended the index. The size of the answers array will change because we take out elements from
-        //it later in the loop.
         $A_index = rand(0,sizeof($answers)-1);
-
-        //Echo an HTML input field of the type radio. The value will be chosen from the answer array at the random
-        //index chosen by A_index.
-        echo "<input type='radio' name='answer' value=$answers[$A_index]>$answers[$A_index]</br>";
-
-        //We use the unset function to take out the answer from the array that we just displayed so that the
-        //choices aren't repeated.
+        echo "<input type='radio' name='question_1' value=$answers[$A_index]>$answers[$A_index]</br>";
         unset($answers[$A_index]);
-
-        //Use the array_valuea() function to re-index the answers array. the unset() function does not re-index and
-        //thus will cause complications in the algorithm.
         $answers = array_values($answers);
     }
+}
+
+function query(){
+    global $conn;
+
+    $chapter = $_SESSION['chapters'][0];
+
+//Getting the number of questions in the table
+    $num_Questions = $conn->query("SELECT COUNT(*) FROM ".$chapter);
+    $num_Questions = $num_Questions->fetch_array(MYSQLI_NUM);
+
+
+    do{
+
+//Choosing a random index between 1 and the number of questions there are in the table. This number will be used to
+//choose a random question from the table and it's associated answer set.
+        $Q_ID = rand(1,$num_Questions[0]);
+
+    }while(in_array($Q_ID, $_SESSION['usedQuestions']));
+
+    array_push($_SESSION['usedQuestions'], $Q_ID);
+//Creating query strings to be used inside the query. if we need to do the same query again, it is better to put
+//it in a variable
+
+//Query for pulling the question from the databse
+    $question_Query = "SELECT Question FROM ".$chapter." WHERE Q_ID=$Q_ID";
+
+//Query for the answer set of the chosen question
+    $answer_Query = "SELECT Answer,W_Answer_1,W_Answer_2,W_Answer_3 FROM ".$chapter." WHERE Q_ID=$Q_ID";
+
+
+//Applying the query for the question and storing the results in the question object. The data cannot be used yet.
+    $question = $conn->query($question_Query);
+//Turning the results into an array so we can work with it in php. The MYSQLI_NUM parameter will give us a numbered index.
+//We can also get the column name as the indexes with MYSQLI_NUM parameter.
+    $question = $question->fetch_array(MYSQLI_NUM);
+    $_SESSION{'question'} = $question;
+
+//Querying the database for the answer set of the chosen question and turning the results into a numbered array.
+    $answers = $conn->query($answer_Query);
+    $answers = $answers->fetch_array(MYSQLI_NUM);
+    $_SESSION['answers'] = $answers;
 }
