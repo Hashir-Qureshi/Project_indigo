@@ -3,7 +3,7 @@
 
 $servername = "localhost";
 $username = "root";
-$password = "Qureshi1452";
+$password = "Fedorasucks";
 $dbname = "project indigo";
 
 //Creating a connection object that will be used to connect to the database anytime we need to.
