@@ -1,7 +1,6 @@
 <?php
     require 'includes/Authorization.php';
 ?>
-
 <DOCTYPE html!>
     <html>
     <head>
