@@ -4,6 +4,7 @@ if(empty($_SESSION['usedQuestions'])) {
     query();
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
