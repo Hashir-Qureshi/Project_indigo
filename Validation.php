@@ -1,56 +1,56 @@
 <?php session_start();
-if(!empty($_POST['check'])) {
+    if(!empty($_POST['check'])) {
 
-    $_SESSION['attemptedAnswer'] = true;
+        $_SESSION['attemptedAnswer'] = true;
 
-    $answer = $_POST['question_1'];
+        $answer = $_POST['question_1'];
 
-    if($answer == $_SESSION['answers'][0]){
-
-
-        if($_SESSION['try'] == 1){
-            $_SESSION['status'] = "Correct";
-            $_SESSION['try'] = 0;
-            $_SESSION['score'] += .75;
-
-        }else {
-
-            $_SESSION['status'] = "Correct";
-            $_SESSION['score'] += 1;
-        }
+        if($answer == $_SESSION['answers'][0]){
 
 
-        if(sizeof($_SESSION['usedQuestions']) != 5){
-            header('location: Assignment.php');
-            exit;
-        }else{
+            if($_SESSION['try'] == 1){
+                $_SESSION['status'] = "Correct";
+                $_SESSION['try'] = 0;
+                $_SESSION['score'] += .75;
 
-            header('location: Confirmation.php');
-            exit;
-        }
+            }else {
 
+                $_SESSION['status'] = "Correct";
+                $_SESSION['score'] += 1;
+            }
 
-
-    }else {
-
-        if($_SESSION['try'] == 0) {
-            $_SESSION['try'] = 1;
-            $_SESSION['status'] = "Wrong! Try 1 more time for .75 points";
-            header('location: Assignment.php');
-            exit;
-        }else {
 
             if(sizeof($_SESSION['usedQuestions']) != 5){
-                $_SESSION['try'] = 0;
-                $_SESSION['status'] = "";
-                header( 'location: Assignment.php');
+                header('location: Assignment.php');
                 exit;
-            }else {
+            }else{
 
                 header('location: Confirmation.php');
                 exit;
             }
 
+
+
+        }else {
+
+            if($_SESSION['try'] == 0) {
+                $_SESSION['try'] = 1;
+                $_SESSION['status'] = "Wrong! Try 1 more time for .75 points";
+                header('location: Assignment.php');
+                exit;
+            }else {
+
+                if(sizeof($_SESSION['usedQuestions']) != 5){
+                    $_SESSION['try'] = 0;
+                    $_SESSION['status'] = "";
+                    header( 'location: Assignment.php');
+                    exit;
+                }else {
+
+                    header('location: Confirmation.php');
+                    exit;
+                }
+
+            }
         }
     }
-}

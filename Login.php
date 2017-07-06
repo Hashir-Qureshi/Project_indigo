@@ -1,5 +1,5 @@
 <?php
-require 'includes/Authorization.php';
+    require 'includes/Authorization.php';
 ?>
 
 <DOCTYPE html!>
