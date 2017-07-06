@@ -5,7 +5,6 @@ session_start();
         $_SESSION['attemptedAnswer'] = false;
     }
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
