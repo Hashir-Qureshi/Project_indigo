@@ -1,28 +1,37 @@
-<?php session_start();
-
-$_SESSION['usedQuestions'] = array();
-
-$_SESSION['MaxQuestions'] = 5;
-
-$_SESSION['try']=0;
-
-$_SESSION['status'] = "";
-
-$_SESSION['score'] = 0;
-
-
-$chapters = array('ch_1','ch_2','ch_3');
-if(!empty($_POST['choice'])) {
-    $_SESSION['choice'] = $_POST['choice'];
-    if($_SESSION['choice'] == 1) {
-        $_SESSION['chapters'] = $chapters;
-        header('location: Assignment_1.php');
+<?php require 'Functions.php';
+session_start();
+    if(empty($_SESSION['usedQuestions'])) {
+        query();
     }
-}
+?>
 
 
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Assignment </title>
+    </head>
+    <body id="edit">
+        <div> <?php echo "PROGRESS: ". sizeof($_SESSION['usedQuestions']). "/".$_SESSION['MaxQuestions']; ?></div>
+        <div style="margin:auto; width:20%; border: 3px solid indigo; text-align: center;">
+            <h2 id="question">
+                <?php echo $_SESSION['question']; ?>
+            </h2>
+            <form id="myForm">
+                <div id="answers" style="text-align: left;">
 
+                    <?php  $answers = $_SESSION['answers']; shuffle($answers);
+                    foreach ($answers as $answer):?>
 
+                        <label>
+                        <input id="" type="radio" name="answer" value="<?php echo $answer; ?>"> <?php echo $answer; ?>
+                        </label>> <br>
 
+                    <?php endforeach; ?>
 
-
+                </div>
+                <input type="submit" name="check" value="Grade Me!">
+            </form>
+        </div>
+        </body>
+</html>

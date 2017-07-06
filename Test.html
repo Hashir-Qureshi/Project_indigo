@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Testing AJAX</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="JavaScript/jquery-3.2.1.js"></script>
     <script>
         $(document).ready(function() {
             var btn = document.getElementById('btn');
@@ -21,11 +21,12 @@
                     url         : 'Test.php', // the url where we want to POST
                     data        : formData, // our data object
                     dataType    : 'json', // what type of data do we expect back from the server
-                    encode          : true
+                    encode      : true
                 })
                     .done(function(data) {
                         // log data to the console so we can see
-
+                        console.log(data);
+                        //var mydata = JSON.parse(data);
                         // here we will handle errors and validation messages
                         if(data.check){
                             btn.style.color = "green";
