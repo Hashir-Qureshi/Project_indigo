@@ -1,7 +1,8 @@
 <?php require 'Functions.php';
 session_start();
-    if(empty($_SESSION['usedQuestions'])) {
+    if((empty($_SESSION['usedQuestions']) || $_SESSION['attemptedAnswer']) && $_SESSION['try'] != 1) {
         query();
+        $_SESSION['attemptedAnswer'] = false;
     }
 ?>
 
@@ -14,24 +15,14 @@ session_start();
     <body id="edit">
         <div> <?php echo "PROGRESS: ". sizeof($_SESSION['usedQuestions']). "/".$_SESSION['MaxQuestions']; ?></div>
         <div style="margin:auto; width:20%; border: 3px solid indigo; text-align: center;">
-            <h2 id="question">
-                <?php echo $_SESSION['question']; ?>
-            </h2>
-            <form id="myForm">
+            <?php question(); ?>
+            <form id="myForm" action="Validation.php" method="post">
                 <div id="answers" style="text-align: left;">
-
-                    <?php  $answers = $_SESSION['answers']; shuffle($answers);
-                    foreach ($answers as $answer):?>
-
-                        <label>
-                        <input id="" type="radio" name="answer" value="<?php echo $answer; ?>"> <?php echo $answer; ?>
-                        </label>> <br>
-
-                    <?php endforeach; ?>
-
+                    <?php answers(); ?>
                 </div>
                 <input type="submit" name="check" value="Grade Me!">
             </form>
         </div>
+        <span> <?php echo $_SESSION['status']; ?> </span>
         </body>
 </html>
