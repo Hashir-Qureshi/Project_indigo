@@ -1,7 +1,12 @@
 <?php require 'Functions.php';
 session_start();
-if(isset($_SESSION['usedQuestions']) && ($_SESSION['try'] != 1)) query();
+    if((empty($_SESSION['usedQuestions']) || $_SESSION['attemptedAnswer']) && $_SESSION['try'] != 1) {
+        query();
+        $_SESSION['attemptedAnswer'] = false;
+    }
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +19,7 @@ if(isset($_SESSION['usedQuestions']) && ($_SESSION['try'] != 1)) query();
     <form id="myForm" action="Validation.php" method="post">
         <div id="answers" style="text-align: left;">
             <?php answers(); ?>
-        </div></br>
+        </div>
         <input type="submit" name="check" value="Grade Me!">
     </form>
 </div>

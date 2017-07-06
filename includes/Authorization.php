@@ -1,12 +1,6 @@
 <?php
-require_once 'Login_info.php';
-session_start();
+require_once 'config/Login_info.php';
 $error = $user = $pass = "";
-global $conn;
-
-$user = $_POST['user'];
-$pass = $_POST['pass'];
-
 
 if (isset($_POST['user']))
 {
@@ -16,8 +10,6 @@ if (isset($_POST['user']))
     if ($user == "" || $pass == ""){
         $error = "Not all fields were entered<br>";
         echo $error;
-       include 'Login.php';
-
     }
     else
     {
@@ -32,10 +24,10 @@ if (isset($_POST['user']))
         {
             $error = "Username/Password invalid<br>";
             echo $error;
-            include 'Login.php';
         }
         else
         {
+            session_start();
             $_SESSION['user'] = $user;
             $_SESSION['pass'] = $pass;
             header( 'location: hub.php');

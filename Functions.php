@@ -1,4 +1,4 @@
-<?php require_once "Login_info.php";
+<?php require_once "config/Login_info.php";
 //session_start();
 
 

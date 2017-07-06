@@ -1,3 +1,7 @@
+<?php
+require 'includes/Authorization.php';
+?>
+
 <DOCTYPE html!>
     <html>
     <head>
@@ -5,7 +9,7 @@
     </head>
     <body>
     <div id ="frm">
-        <form action ="action.php" method="POST">
+        <form action ="" method="POST">
             <p>
                 <label>Username:</label>
                 <input type="text" id="user" name="user"/>
