@@ -15,7 +15,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/Project_indigo/Project_indigo/Validation.php',
+                url: 'Validation.php',
                 data: answer,
                 datatype: 'json',
                 encode: true
