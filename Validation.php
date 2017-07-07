@@ -1,4 +1,5 @@
-<?php session_start();
+<?php require_once 'Functions.php';
+session_start();
 /*
         $_SESSION['attemptedAnswer'] = true;
 
@@ -87,6 +88,9 @@
         // Choose a new question and its answers and set the correct key to true
         query();
         $data['correct'] = true;
+        $data['question'] = $_SESSION['question'];
+        $data['answers'] = $_SESSION['answers'];
+        $data['progress'] = sizeof($_SESSION['usedQuestions']);
 
     }else{
         // The user answered incorrectly
@@ -99,8 +103,15 @@
             // This was the user's second attempt
             // Reset try to 0 and don't increase the score
             // The user gets 0 points for answering the same question wrong twice
+            // Choose a new question
 
                 $_SESSION['try'] = 0;
+            query();
+            $data['correct'] = false;
+            $data['question'] = $_SESSION['question'];
+            $data['answers'] = $_SESSION['answers'];
+            $data['progress'] = sizeof($_SESSION['usedQuestions']);
+
         }
 
     }
