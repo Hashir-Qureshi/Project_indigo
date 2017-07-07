@@ -1,59 +1,7 @@
 <?php require_once 'Functions.php';
+      require_once 'config/DB.connection.php';
 session_start();
-/*
-        $_SESSION['attemptedAnswer'] = true;
 
-        $answer = $_POST['question_1'];
-
-        if($answer == $_SESSION['answers'][0]){
-
-
-            if($_SESSION['try'] == 1){
-                $_SESSION['status'] = "Correct";
-                $_SESSION['try'] = 0;
-                $_SESSION['score'] += .75;
-
-            }else {
-
-                $_SESSION['status'] = "Correct";
-                $_SESSION['score'] += 1;
-            }
-
-
-            if(sizeof($_SESSION['usedQuestions']) != 5){
-                header('location: Assignment.php');
-                exit;
-            }else{
-
-                header('location: Confirmation.php');
-                exit;
-            }
-
-
-
-        }else {
-
-            if($_SESSION['try'] == 0) {
-                $_SESSION['try'] = 1;
-                $_SESSION['status'] = "Wrong! Try 1 more time for .75 points";
-                header('location: Assignment.php');
-                exit;
-            }else {
-
-                if(sizeof($_SESSION['usedQuestions']) != 5){
-                    $_SESSION['try'] = 0;
-                    $_SESSION['status'] = "";
-                    header( 'location: Assignment.php');
-                    exit;
-                }else {
-
-                    header('location: Confirmation.php');
-                    exit;
-                }
-
-            }
-        }
-*/
 
     $answer = $_POST['answer'];
 
@@ -85,12 +33,21 @@ session_start();
             $_SESSION['score'] += 1;
         }
 
+        if(sizeof($_SESSION['usedQuestions']) != $_SESSION['MaxQuestions']){
+            query();
+            $data['correct'] = true;
+            $data['question'] = $_SESSION['question'];
+            $data['answers'] = $_SESSION['answers'];
+            $data['progress'] = sizeof($_SESSION['usedQuestions']);
+        }else{
+            $postGrade = "UPDATE students
+                        SET HW_1_Grade = ".$_SESSION['score']."
+                            WHERE Empl_ID = ".$_SESSION['pass'];
+
+            $conn->query($postGrade);
+        }
         // Choose a new question and its answers and set the correct key to true
-        query();
-        $data['correct'] = true;
-        $data['question'] = $_SESSION['question'];
-        $data['answers'] = $_SESSION['answers'];
-        $data['progress'] = sizeof($_SESSION['usedQuestions']);
+
 
     }else{
         // The user answered incorrectly
