@@ -8,8 +8,8 @@
         $user = $_POST['user'];
         $pass = $_POST['pass'];
 
-        $user = htmlentities(mysqli_real_escape_string($user));
-        $pass = htmlentities(mysqli_real_escape_string($pass));
+        $user = htmlentities(mysqli_real_escape_string($conn, $user));
+        $pass = htmlentities(mysqli_real_escape_string($conn, $pass));
 
 
 
