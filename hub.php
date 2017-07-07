@@ -21,6 +21,17 @@
             }
         }
 
+
+    if(isset($_POST['logout'])){
+        if(isset($_SESSION['user'])){
+            session_destroy();
+            echo "You have been logged out";
+            header ('location: Login.php');
+        }
+
+
+}
+
 ?>
 
 <!Doctype html>
@@ -32,6 +43,10 @@
         <form action="" method="post">
             <input type="submit" name="choice" value="1">
             <input type="submit" name="choice" value="2">
+        </form>
+
+        <form action = ""  method="post">
+            <button type="submit" name="logout">Logout</button>
         </form>
     </body>
 </html>
