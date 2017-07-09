@@ -1,7 +1,7 @@
 <?php
     require 'includes/Authorization.php';
 ?>
-<DOCTYPE html!>
+    <!DOCTYPE html>
     <html>
     <head>
         <title>Login Page</title>
