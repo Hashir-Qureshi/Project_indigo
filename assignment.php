@@ -10,11 +10,11 @@ if(empty($_SESSION['usedQuestions'])) {
 <head>
     <title> Assignment </title>
     <script src="JavaScript/jquery-3.2.1.js"></script>
-    <script src="JavaScript/Validation.js"></script>
+    <script src="JavaScript/work.js"></script>
 </head>
 <body id="edit">
 <div id="flag" style="display:none; width:100%; font-weight: bold;"></div>
-<div style="margin:auto; width:20%; border: 3px solid indigo; text-align: center;">
+<div id="container" style="margin:auto; width:20%; border: 3px solid indigo; text-align: center;">
     <h2 id="question">
         <?php echo $_SESSION['question'][0]; ?>
     </h2>
@@ -31,7 +31,9 @@ if(empty($_SESSION['usedQuestions'])) {
             <?php endforeach; ?>
 
         </div>
-        <input type="submit" name="check" value="Grade Me!">
+            <input id="submit"  type="submit" name="check" value="Grade Me!" >
+        <input id="nextQuestion" type="button" name="next" style="display: none" name="change" value="Next Question" >
+
 
     </form>
 

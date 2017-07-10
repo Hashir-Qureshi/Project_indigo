@@ -88,7 +88,7 @@ session_start();
         // Choose a new question and its answers and set the correct key to true
         query();
         $data['correct'] = true;
-        $data['question'] = $_SESSION['question'];
+        $data['question'] = $_SESSION['question'][0];
         $data['answers'] = $_SESSION['answers'];
         $data['progress'] = sizeof($_SESSION['usedQuestions']);
 
@@ -116,6 +116,7 @@ session_start();
 
     }
 
+        $data['answers'] = shuffle($data['answers']);
 
         echo json_encode($data);
 
