@@ -11,6 +11,7 @@
         <title> Assignment </title>
         <script src="JavaScript/jquery-3.2.1.js"></script>
         <script src="JavaScript/Validation.js"></script>
+        <link rel="stylesheet" href="CSS/assignment.css">
     </head>
     <body id="edit">
     <div id="flag" style="display:none; width:100%; font-weight: bold;"></div>

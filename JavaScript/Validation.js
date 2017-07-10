@@ -28,6 +28,8 @@
         }
     // This variable will be used to keep a copy of the previous label so we can remove all css from it.
         var prevLabel;
+
+
     // Grabbing the main form and adding an event listener to it.
         $('#myForm').on('submit', function(event){
 
@@ -40,6 +42,8 @@
             var changeBtn = $('input[name=change]');
             var submitBtn = $('input[name=check]');
             var finishBtn = $('input[name=finish]');
+            var inputs = $('input[name=answer]');
+            var question = $('h2#question');
         // Setting up the json object that will be sent to be validated.
             var answer = {
             // Contains the value of the user's choice.
@@ -88,7 +92,7 @@
                 // Checks to see if the user had gotten the question wrong before getting it right
                 // if they had, then we need to change the background of the last incorrect label.
                     if(attempt === 1){
-                        prevLabel.css('backgroundColor', '')
+                        $('.wrong').removeClass('wrong');
                     }
 
 
@@ -125,7 +129,7 @@
                         flag.text("Wrong! Try 1 more time for .75 points");
                         flag.css('backgroundColor', '#F08080');
                         flag.show();
-                        label.css('backgroundColor', '#F08080');
+                        label.addClass('wrong');
                     // Set attempt to 1 and store it in the local storage to be safe.
                         attempt = 1;
                         localStorage.setItem('attempt', attempt);
@@ -162,8 +166,6 @@
                     localStorage.setItem('progress', newQuestion.progress);
                     progress = newQuestion.progress;
 
-                    var inputs = $('input[name=answer]');
-                    var question = $('h2#question');
                     question.text(newQuestion.question);
                     inputs.each(function (i) {
                         $(this).next().text(newQuestion.answers[i]);
