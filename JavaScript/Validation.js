@@ -7,6 +7,7 @@
     //Declaring the variables for keeping track of the attempts and progress
         var attempt;
         var progress;
+        var finishBtn = $('input[name=finish]');
 
 
     // Getting the attempt and progress variables from local storage.
@@ -27,7 +28,6 @@
             progress = 1;
         }
     // This variable will be used to keep a copy of the previous label so we can remove all css from it.
-        var prevLabel;
 
 
     // Grabbing the main form and adding an event listener to it.
@@ -41,7 +41,6 @@
         // Grabbing the buttons to change the question, submit the answer, and finish the assignment.
             var changeBtn = $('input[name=change]');
             var submitBtn = $('input[name=check]');
-            var finishBtn = $('input[name=finish]');
             var inputs = $('input[name=answer]');
             var question = $('h2#question');
         // Setting up the json object that will be sent to be validated.
@@ -50,9 +49,6 @@
                 'answer': choice.val()
 
             };
-        // Grabbing the label for the radio button that the user chose.
-        // Since we have limited style options for radio buttons, we will style their labels.
-            var label = $('#'+choice.val());
 
         // Requesting Validation from the server in the background, without reloading the page.
             $.ajax({
@@ -75,7 +71,7 @@
                     flag.css('backgroundColor', '#90EE90');
                     flag.show();
                 // Set the background color of the chosen answer to light green as well.
-                    label.css('backgroundColor', '#90EE90');
+                    choice.parent().addClass('correct');
                 // Hide the submit button.
                     submitBtn.hide();
                 // The following if/else will check to see if the answered question was the last question.
@@ -119,7 +115,8 @@
                     // Change the background color of the flag to light red to signify that the answer was incorrect.
                         flag.css('backgroundColor', '#F08080');
                         flag.show();
-                        label.css('backgroundColor', '#F08080');
+                        $('.wrong').removeClass('wrong');
+                        choice.parent().addClass('wrong');
 
 
                     // reset attempt
@@ -129,15 +126,13 @@
                         flag.text("Wrong! Try 1 more time for .75 points");
                         flag.css('backgroundColor', '#F08080');
                         flag.show();
-                        label.addClass('wrong');
+                        choice.parent().addClass('wrong');
                     // Set attempt to 1 and store it in the local storage to be safe.
                         attempt = 1;
                         localStorage.setItem('attempt', attempt);
                     }
 
                 }
-            // Setting prevLabel equal to the current label so we can use it when the current label changes.
-                prevLabel = label;
 
 
 
@@ -176,8 +171,10 @@
 
 
                 });
+
                 flag.hide();
-                label.css('backgroundColor', '');
+                choice.parent().removeClass('correct');
+                $('.wrong').removeClass('wrong');
                 choice.prop('checked', false);
                 changeBtn.hide();
                 submitBtn.show();
@@ -185,14 +182,13 @@
             });
 
 
-            finishBtn.unbind('click').on('click', function(){
-                localStorage.clear();
-                window.location = "Confirmation.php";
-            });
 
         });
 
-
+            finishBtn.on('click', function(){
+                localStorage.clear();
+                window.location = "Confirmation.php";
+            });
 
 
 
