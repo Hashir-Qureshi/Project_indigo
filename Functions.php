@@ -1,26 +1,19 @@
-<?php require_once "config/DB.connection.php";
+ <?php
     //session_start();
 
 
-
-    function question(){
-        echo "<h2 id='question_1'>". $_SESSION['question'][0]."</h2>";
-    }
-
-    function answers(){
-        $answers = $_SESSION['answers'];
-        for($i =0;$i<4;$i++){
-            $A_index = rand(0,sizeof($answers)-1);
-            echo "<input type='radio' name='question_1' value=$answers[$A_index]>$answers[$A_index]</br>";
-            unset($answers[$A_index]);
-            $answers = array_values($answers);
-        }
-    }
-
     function query(){
-        global $conn;
 
-        $chapter = $_SESSION['chapters'][0];
+    require "config/DB.connection.php";
+
+        
+        if(sizeof($_SESSION['usedQuestions']) < 4){
+            $chapter = $_SESSION['chapters'][0];
+        }elseif(sizeof($_SESSION['usedQuestions']) < 8){
+            $chapter = $_SESSION['chapters'][1];
+        }else
+            $chapter = $_SESSION['chapters'][2];
+     
 
     //Getting the number of questions in the table
         $num_Questions = $conn->query("SELECT COUNT(*) FROM ".$chapter);
@@ -32,7 +25,7 @@
     //Choosing a random index between 1 and the number of questions there are in the table. This number will be used to
     //choose a random question from the table and it's associated answer set.
             $Q_ID = rand(1,$num_Questions[0]);
-
+            
         }while(in_array($Q_ID, $_SESSION['usedQuestions']));
 
         array_push($_SESSION['usedQuestions'], $Q_ID);

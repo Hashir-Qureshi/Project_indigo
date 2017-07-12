@@ -29,6 +29,10 @@
         }
     // This variable will be used to keep a copy of the previous label so we can remove all css from it.
 
+        var progDisplay = $('div#progress');
+
+        progDisplay.text("Progress = "+progress+"/12");
+
 
     // Grabbing the main form and adding an event listener to it.
         $('#myForm').on('submit', function(event){
@@ -75,7 +79,7 @@
                 // Hide the submit button.
                     submitBtn.hide();
                 // The following if/else will check to see if the answered question was the last question.
-                    if(progress === 5){
+                    if(progress === 12){
                     // The question was the last one. Display the finish button to let the user finish the assignment.
                         finishBtn.show();
                     // Change the text of the flag to reflect the status of the assignment.
@@ -103,7 +107,7 @@
 
                         submitBtn.hide();
 
-                        if(progress === 5){
+                        if(progress === 12){
                         // The user answered the last question of the assignment.
                             flag.text("Wrong! Click \"View Grade\" to see how you did.");
                             finishBtn.show();
@@ -162,10 +166,12 @@
                     progress = newQuestion.progress;
 
                     question.text(newQuestion.question);
+                    progDisplay.text("Progress = "+progress+"/12");
                     inputs.each(function (i) {
                         $(this).next().text(newQuestion.answers[i]);
                         $(this).val(newQuestion.answers[i]);
                         $(this).parent().attr('id', newQuestion.answers[i])
+                        
                     });
 
 
@@ -178,6 +184,8 @@
                 choice.prop('checked', false);
                 changeBtn.hide();
                 submitBtn.show();
+
+
 
             });
 
