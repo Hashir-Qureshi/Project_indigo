@@ -33,20 +33,45 @@
 
         progDisplay.text("Progress = "+progress+"/12");
 
+        var choice;
+
+        if(localStorage.getItem('choice') !== null){
+            var value = localStorage.getItem('choice');
+           choice = $("input[value='"+value+"']");
+        }
+
+        
+    // Grabbing the buttons to change the question, submit the answer, and finish the assignment.
+        var changeBtn = $('input[name=change]');
+        var submitBtn = $('input[name=check]');
+        var inputs = $('input[name=answer]');
+        var question = $('h2#question');
+
+        if(attempt === 2){
+            submitBtn.hide();
+            changeBtn.show();
+            flag.text("Wrong! Click on \"Next Question\" to go to the next question.");
+            flag.css('backgroundColor', '#F08080');
+            flag.show();
+            choice.prop('checked', true);
+            choice.parent().addClass('wrong');
+        }else if(attempt === 1){
+            flag.text("Wrong! Try 1 more time for .75 points");
+            flag.css('backgroundColor', '#F08080');
+            flag.show();
+            choice.prop('checked', true);
+            choice.parent().addClass('wrong');
+        }
+
 
     // Grabbing the main form and adding an event listener to it.
         $('#myForm').on('submit', function(event){
 
-
         // Preventing the form from submitting and reloading the page.
             event.preventDefault();
         // Grabbing the user's chosen radio button.
-            var choice = $('input[name=answer]:checked');
-        // Grabbing the buttons to change the question, submit the answer, and finish the assignment.
-            var changeBtn = $('input[name=change]');
-            var submitBtn = $('input[name=check]');
-            var inputs = $('input[name=answer]');
-            var question = $('h2#question');
+            choice = $('input[name=answer]:checked');
+            localStorage.setItem('choice', choice.val());
         // Setting up the json object that will be sent to be validated.
             var answer = {
             // Contains the value of the user's choice.
@@ -123,8 +148,6 @@
                         choice.parent().addClass('wrong');
 
 
-                    // reset attempt
-                        attempt = 0;
                     }else{
                     // This was their first attempt.
                         flag.text("Wrong! Try 1 more time for .75 points");
@@ -132,16 +155,20 @@
                         flag.show();
                         choice.parent().addClass('wrong');
                     // Set attempt to 1 and store it in the local storage to be safe.
-                        attempt = 1;
-                        localStorage.setItem('attempt', attempt);
                     }
 
                 }
 
 
-
+                attempt++;
+                localStorage.setItem('attempt', attempt);
 
             });
+
+
+
+
+        });
 
         // Attaching the event listener to the Next Question button
         // We first need to unbind any click event listeners. The button is attached
@@ -161,7 +188,7 @@
                 }).done(function(data){
                     var newQuestion = JSON.parse(data);
 
-
+                    console.log(newQuestion);
                     localStorage.setItem('progress', newQuestion.progress);
                     progress = newQuestion.progress;
 
@@ -184,21 +211,16 @@
                 choice.prop('checked', false);
                 changeBtn.hide();
                 submitBtn.show();
-
+                attempt = 0;
+                localStorage.setItem('attempt', attempt);
 
 
             });
 
-
-
-        });
 
             finishBtn.on('click', function(){
                 localStorage.clear();
                 window.location = "Confirmation.php";
             });
-
-
-
     });
 

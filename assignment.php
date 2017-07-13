@@ -1,6 +1,6 @@
 <?php require 'Functions.php';
     session_start();
-    if(empty($_SESSION['usedQuestions'])) {
+    if(empty($_SESSION['usedQuestions'][0])) {
         query();
     }
     ?>

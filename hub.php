@@ -1,6 +1,6 @@
 <?php session_start();
 
-    $_SESSION['usedQuestions'] = array();
+    $_SESSION['usedQuestions'] = array(array(), array(), array());
 
     $_SESSION['MaxQuestions'] = 12;
 
