@@ -1,5 +1,9 @@
 <?php
     require 'includes/Authorization.php';
+    if(isset($_GET["msg"])){
+        echo $_GET["msg"];
+    }
+
 ?>
 <DOCTYPE html!>
     <html>

@@ -1,5 +1,5 @@
-<?php session_start();
-
+<?php
+require 'Login.confirmation.php';
     $_SESSION['usedQuestions'] = array();
 
     $_SESSION['MaxQuestions'] = 5;
@@ -35,11 +35,13 @@
 ?>
 
 <!Doctype html>
+
 <html>
     <head>
     </head>
     <body>
-        <?php echo "Logged in as: ".$_SESSION['user'];?>
+        <?php
+        echo "Logged in as: ".$_SESSION['user']; ?>
         <form action="" method="post">
             <input type="submit" name="choice" value="1">
             <input type="submit" name="choice" value="2">

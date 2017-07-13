@@ -1,5 +1,5 @@
 <?php require 'Functions.php';
-session_start();
+require 'Login.confirmation.php';
 if(empty($_SESSION['usedQuestions'])) {
     query();
 }
