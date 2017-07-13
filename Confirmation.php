@@ -1,6 +1,7 @@
 <?php require_once 'config/DB.connection.php';
 
     require 'Login.confirmation.php';
+
     if(isset($_POST['logout'])) {
         if (isset($_SESSION['user'])) {
             session_destroy();
@@ -25,5 +26,8 @@
             <h4>Your Score was <?php echo $results[0] ?></h4>
             <button onclick="location.href='hub.php'" type="button" >
                Back to Hub</button>
+            <form action="" method="POST">
+                <input type="submit" name="logout" value="Logout">
+            </form>
         </body>
     </html>

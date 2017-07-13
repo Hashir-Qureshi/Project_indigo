@@ -55,5 +55,8 @@
                 <input type="submit" name="choice" value="1">
                 <input type="submit" name="choice" value="2">
             </form>
+            <form action="" method="POST">
+                <input type="submit" name="logout" value="Logout">
+            </form>
         </body>
     </html>
