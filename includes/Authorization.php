@@ -14,7 +14,7 @@
 
 
         if ($user == "" || $pass == ""){
-            $error = "Not all fields were entered<br>";
+            $error = "Must specify an email and password<br>";
             echo $error;
         }else{
 
