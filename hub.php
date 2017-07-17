@@ -9,13 +9,13 @@
         }
     }
 
-    $homeworks = array(
+    $assignments = array(
             "1" => "Not Available",
             "2" => "Not Available",
             "3" => "Not Available"
         );
 
-    $query = "SELECT homeworks.HW_ID, students.HW_1_Grade, students.HW_2_Grade, students.HW_3_Grade from homeworks, students WHERE (students.Empl_ID = 1) AND (homeworks.Start_Date < NOW() AND homeworks.End_Date > NOW())";
+    $query = "SELECT assignments.ID, students.HW_1_Grade, students.HW_2_Grade, students.HW_3_Grade from assignments, students WHERE (students.Empl_ID = 1) AND (assignments.Start_Date < NOW() AND assignments.End_Date > NOW())";
 
     
     $result = $conn->query($query);
@@ -23,9 +23,9 @@
 
     while ($row = mysqli_fetch_assoc($result)){
 
-        $HW_Number = $row["HW_ID"];
+        $HW_Number = $row["ID"];
 
-        $homeworks[$HW_Number] = ($row["HW_".$HW_Number."_Grade"] != NULL) ? "Not Available" : "Available";
+        $assignments[$HW_Number] = ($row["HW_".$HW_Number."_Grade"] != NULL) ? "Not Available" : "Available";
     }
 
 
@@ -72,9 +72,9 @@
         <body>
             <?php echo "Logged in as: ".$_SESSION['user'];?>
             <form action="" method="post">
-                <input type="submit" name="choice" value="1" <?php echo  ($homeworks['1'] != "Available") ? "disabled" : ""; ?> >
-                <input type="submit" name="choice" value="2" <?php echo  ($homeworks['2'] != "Available") ? "disabled" : ""; ?> >
-                <input type="submit" name="choice" value="3" <?php echo  ($homeworks['3'] != "Available") ? "disabled" : ""; ?> >
+                <input type="submit" name="choice" value="1" <?php echo  ($assignments['1'] != "Available") ? "disabled" : ""; ?> >
+                <input type="submit" name="choice" value="2" <?php echo  ($assignments['2'] != "Available") ? "disabled" : ""; ?> >
+                <input type="submit" name="choice" value="3" <?php echo  ($assignments['3'] != "Available") ? "disabled" : ""; ?> >
             </form>
             <form action="" method="POST">
                 <input type="submit" name="logout" value="Logout">

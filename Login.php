@@ -24,6 +24,7 @@
     <script src="/JavaScript/jquery-3.2.1.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="JavaScript/bootstrap.min.js"></script>
+    
 </head>
 
 <body>
