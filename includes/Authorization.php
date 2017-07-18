@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'].'/Project_indigo/Project_indigo/config/DB.connection.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/Project_indigo/config/DB.connection.php';
 
     $error = $user = $pass = "";
 
@@ -14,7 +14,7 @@
 
 
         if ($user == "" || $pass == ""){
-            $error = "Not all fields were entered<br>";
+            $error = "Must specify an email and password<br>";
             echo $error;
         }else{
 
@@ -34,6 +34,7 @@
                 session_start();
                 $_SESSION['user'] = $user;
                 $_SESSION['pass'] = $pass;
+                $_SESSION['loggedin'] = True;
                 header( 'location: hub.php');
                 exit;
             }
