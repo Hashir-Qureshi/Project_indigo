@@ -1,22 +1,54 @@
  <?php
-    //session_start();
-
 
     function query(){
 
     require "config/DB.connection.php";
 
         
-        if((sizeof($_SESSION['usedQuestions'], 1) - 3) < 4){
-            $chapter = $_SESSION['chapters'][0];
-            $chapIndex = 0;
-        }elseif((sizeof($_SESSION['usedQuestions'], 1) - 3) < 8){
-            $chapter = $_SESSION['chapters'][1];
-            $chapIndex = 1;
-        }else{
-            $chapter = $_SESSION['chapters'][2];
-            $chapIndex = 2;
+        switch($_SESSION['choice']){
+
+            case 1:
+            case 2: 
+
+                $usedQuestions = (sizeof($_SESSION['usedQuestions'], 1) - 4);
+
+                if($usedQuestions < 3){
+                    $chapter = $_SESSION['chapters'][0];
+                    $chapIndex = 0;
+                }elseif($usedQuestions < 6){
+                    $chapter = $_SESSION['chapters'][1];
+                    $chapIndex = 1;
+                }elseif( $usedQuestions < 9){
+                    $chapter = $_SESSION['chapters'][2];
+                    $chapIndex = 2;
+                }else{
+                    $chapter = $_SESSION['chapters'][3];
+                    $chapIndex = 3;
+                }
+                break;
+            case 3:
+
+                $usedQuestions = (sizeof($_SESSION['usedQuestions'], 1) - 5);
+
+                if($usedQuestions < 2){
+                    $chapter = $_SESSION['chapters'][0];
+                    $chapIndex = 0;
+                }elseif($usedQuestions < 4){
+                    $chapter = $_SESSION['chapters'][1];
+                    $chapIndex = 1;
+                }elseif( $usedQuestions < 6){
+                    $chapter = $_SESSION['chapters'][2];
+                    $chapIndex = 2;
+                }else($usedQuestions < 8){
+                    $chapter = $_SESSION['chapters'][3];
+                    $chapIndex = 3;
+                }else{
+                    $chapter = $_SESSION['chapters'][4];
+                    $chapIndex = 4;
+                }
+                break;
         }
+
 
 
     //Getting the number of questions in the table
@@ -36,7 +68,7 @@
     //Creating query strings to be used inside the query. if we need to do the same query again, it is better to put
     //it in a variable
 
-    //Query for pulling the question from the databse
+    //Query for pulling the question from the database
         $question_Query = "SELECT Question FROM ".$chapter." WHERE Q_ID=$Q_ID";
 
     //Query for the answer set of the chosen question

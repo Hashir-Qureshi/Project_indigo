@@ -30,10 +30,7 @@
 
 
 
-    $_SESSION['usedQuestions'] = array(array(), array(), array());
 
-
-    $_SESSION['MaxQuestions'] = 12;
 
     $_SESSION['try']=0;
 
@@ -43,19 +40,35 @@
 
 
 
-    $assignment_1 = array('ch_1','ch_2','ch_3');
-    $assignment_2 = array('ch_4','ch_5','ch_6');
-    $assignment_3 = array('ch_7','ch_8','ch_9');
+    $assignmentChapters = array(
+                "assignment_1" => array('ch_1', 'ch_2', 'ch_3', 'ch_5'),
+                "assignment_2" => array('ch_6', 'ch_7', 'ch_8', 'ch_9'),
+                "assignment_3" => array('ch_10', 'ch_11', 'ch_12', 'ch_13', 'ch_14')
+        );
+
 
         if(!empty($_POST['choice'])) {
             $_SESSION['choice'] = $_POST['choice'];
-            if($_SESSION['choice'] == 1) {
-                $_SESSION['chapters'] = $assignment_1;
-                header('location: Assignment.php');
-            }elseif ($_SESSION['choice'] == 2) {
-                $_SESSION['chapters'] = $assignment_2;
-            }else
-                $_SESSION['chapters'] = $assignment_3;
+
+            switch($_SESSION['choice']){
+                case 1:
+                    $_SESSION['usedQuestions'] = array(array(), array(), array(), array());
+                    $_SESSION['chapters'] = $assignmentChapters["assignment_1"];
+                    $_SESSION['MaxQuestions'] = 12;
+
+                case 2:
+                    $_SESSION['usedQuestions'] = array(array(), array(), array(), array());
+                    $_SESSION['chapters'] = $assignmentChapters["assignment_2"];
+                    $_SESSION['MaxQuestions'] = 12;
+                    break;
+                case 3:
+
+                    $_SESSION['usedQuestions'] = array(array(), array(), array(), array(), array());
+                    $_SESSION['chapters'] = $assignmentChapters["assignment_3"];
+                    $_SESSION['MaxQuestions'] = 10;
+                    break;
+
+            }
 
             header('location: Assignment.php');
         }
@@ -68,13 +81,19 @@
     <!Doctype html>
     <html>
         <head>
+        <script>
+            function setMaxQuestions(maxQuestions){
+                    localStorage.setItem('maxQuestions', maxQuestions);
+                    document.getElementById("myForm").submit();
+            }
+        </script>
         </head>
         <body>
             <?php echo "Logged in as: ".$_SESSION['user'];?>
-            <form action="" method="post">
-                <input type="submit" name="choice" value="1" <?php echo  ($assignments['1'] != "Available") ? "disabled" : ""; ?> >
-                <input type="submit" name="choice" value="2" <?php echo  ($assignments['2'] != "Available") ? "disabled" : ""; ?> >
-                <input type="submit" name="choice" value="3" <?php echo  ($assignments['3'] != "Available") ? "disabled" : ""; ?> >
+            <form id="myForm" action="" method="post">
+                <input type="submit" onclick="setMaxQuestions(12); return(false);" name="choice" value="1" <?php echo  ($assignments['1'] != "Available") ? "disabled" : ""; ?> >
+                <input type="submit" onclick="setMaxQuestions(12); return(false);" name="choice" value="2" <?php echo  ($assignments['2'] != "Available") ? "disabled" : ""; ?> >
+                <input type="submit" onclick="setMaxQuestions(10); return(false);" name="choice" value="3" <?php echo  ($assignments['3'] != "Available") ? "disabled" : ""; ?> >
             </form>
             <form action="" method="POST">
                 <input type="submit" name="logout" value="Logout">

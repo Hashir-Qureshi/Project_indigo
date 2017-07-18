@@ -3,16 +3,26 @@
 session_start();
 
     $result = array(
-        'correct' => false
+        'correct' => false,
     );
 
+        switch($_SESSION['choice']){
+            case 1:
+            case 2:
+                $usedQuestions = (sizeof($_SESSION['usedQuestions'], 1) - 4);
+                break;
+            case 3:
+                $usedQuestions = (sizeof($_SESSION['usedQuestions'], 1) - 5);
+
+        }
 
     $data = array(
         'question' => $_SESSION['question'],
         'answers' => $_SESSION['answers'],
-        'progress' => sizeof($_SESSION['usedQuestions'], 1) - 3,
-        'usedQuestions' => $_SESSION['usedQuestions']
-);
+        'progress' => $usedQuestions
+    );
+
+
     if(isset($_POST['answer'])){
         $answer = $_POST['answer'];
 
@@ -41,7 +51,7 @@ session_start();
 
             $result['correct'] = true;
 
-            if((sizeof($_SESSION['usedQuestions'], 1) - 3) == $_SESSION['MaxQuestions']){
+            if($usedQuestions == $_SESSION['MaxQuestions']){
                 $postGrade = "UPDATE students
                         SET HW_1_Grade = ".$_SESSION['score']."
                             WHERE Empl_ID = ".$_SESSION['pass'];
@@ -64,7 +74,7 @@ session_start();
 
                 $_SESSION['try'] = 0;
 
-                if((sizeof($_SESSION['usedQuestions'], 1) - 3) == $_SESSION['MaxQuestions']){
+                if($usedQuestions == $_SESSION['MaxQuestions']){
                     $postGrade = "UPDATE students
                         SET HW_1_Grade = ".$_SESSION['score']."
                             WHERE Empl_ID = ".$_SESSION['pass'];
@@ -89,8 +99,7 @@ session_start();
             query();
             $data['question'] = $_SESSION['question'];
             $data['answers'] = $_SESSION['answers'];
-            $data['progress'] = sizeof($_SESSION['usedQuestions'], 1) - 3;
-            $data['usedQuestions'] = $_SESSION['usedQuestions'];
+            $data['progress'] = $usedQuestions;
 
         shuffle($data['answers']);
 

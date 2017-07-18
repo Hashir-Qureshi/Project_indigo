@@ -7,7 +7,9 @@
     //Declaring the variables for keeping track of the attempts and progress
         var attempt;
         var progress;
+        var maxQuestions = parseInt(localStorage.getItem('maxQuestions'));
         var finishBtn = $('input[name=finish]');
+
 
 
     // Getting the attempt and progress variables from local storage.
@@ -31,7 +33,7 @@
 
         var progDisplay = $('div#progress');
 
-        progDisplay.text("Progress = "+progress+"/12");
+        progDisplay.text("Progress = "+progress+"/"+maxQuestions);
 
         var choice;
 
@@ -91,8 +93,7 @@
 
             //Decoding the data we get back as a JSON object.
                 var response    = JSON.parse(data);
-
-
+                
                 if(response.correct){
                 // The correct key in our object was set to true, which means the answer was correct.
 
@@ -104,7 +105,7 @@
                 // Hide the submit button.
                     submitBtn.hide();
                 // The following if/else will check to see if the answered question was the last question.
-                    if(progress === 12){
+                    if(progress === maxQuestions){
                     // The question was the last one. Display the finish button to let the user finish the assignment.
                         finishBtn.show();
                     // Change the text of the flag to reflect the status of the assignment.
@@ -132,7 +133,7 @@
 
                         submitBtn.hide();
 
-                        if(progress === 12){
+                        if(progress === maxQuestions){
                         // The user answered the last question of the assignment.
                             flag.text("Wrong! Click \"View Grade\" to see how you did.");
                             finishBtn.show();
@@ -193,7 +194,7 @@
                     progress = newQuestion.progress;
 
                     question.text(newQuestion.question);
-                    progDisplay.text("Progress = "+progress+"/12");
+                    progDisplay.text("Progress = "+progress+"/"+ maxQuestions);
                     inputs.each(function (i) {
                         $(this).next().text(newQuestion.answers[i]);
                         $(this).val(newQuestion.answers[i]);
