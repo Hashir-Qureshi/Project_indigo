@@ -116,7 +116,7 @@ session_start();
 
     }
 
-        $data['answers'] = shuffle($data['answers']);
+        shuffle($data['answers']);
 
         echo json_encode($data);
 

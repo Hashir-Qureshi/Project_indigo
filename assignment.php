@@ -25,7 +25,7 @@ if(empty($_SESSION['usedQuestions'])) {
             foreach ($answers as $answer):?>
 
                 <label id="<?php echo $answer; ?>" style="display:block" >
-                    <input id="answer" type="radio" name="answer" value="<?php echo $answer; ?>"> <?php echo $answer; ?>
+                    <input id="answer" type="radio" name="answer" value="<?php echo $answer; ?>"> <span> <?php echo $answer; ?> </span>
                 </label> <br>
 
             <?php endforeach; ?>
