@@ -1,25 +1,23 @@
-<?php require_once 'Functions.php';
-      require_once 'config/DB.connection.php';
-session_start();
+<?php 
+
+
+spl_autoload_register(function($class){
+    include $class.'.class.php';
+});
+
+    require_once 'config/DB.connection.php';
+
+    session_start();
+    $assignment = $_SESSION['assignment'];
 
     $result = array(
         'correct' => false,
     );
 
-        switch($_SESSION['choice']){
-            case 1:
-            case 2:
-                $usedQuestions = (sizeof($_SESSION['usedQuestions'], 1) - 4);
-                break;
-            case 3:
-                $usedQuestions = (sizeof($_SESSION['usedQuestions'], 1) - 5);
-
-        }
-
     $data = array(
         'question' => $_SESSION['question'],
         'answers' => $_SESSION['answers'],
-        'progress' => $usedQuestions
+        'progress' => $assignment->getUsedQuestions()
     );
 
 
@@ -51,7 +49,7 @@ session_start();
 
             $result['correct'] = true;
 
-            if($usedQuestions == $_SESSION['MaxQuestions']){
+            if($assignment->getUsedQuestions() == $assignment->getMaxQuestions()){
                 $postGrade = "UPDATE students
                         SET HW_1_Grade = ".$_SESSION['score']."
                             WHERE Empl_ID = ".$_SESSION['pass'];
@@ -74,7 +72,7 @@ session_start();
 
                 $_SESSION['try'] = 0;
 
-                if($usedQuestions == $_SESSION['MaxQuestions']){
+                if($assignment->getUsedQuestions() == $assignment->getMaxQuestions()){
                     $postGrade = "UPDATE students
                         SET HW_1_Grade = ".$_SESSION['score']."
                             WHERE Empl_ID = ".$_SESSION['pass'];
@@ -96,10 +94,10 @@ session_start();
 
 
             // Choose a new question and its answers and set the correct key to true
-            query();
+            $assignment->generateQuestion();
             $data['question'] = $_SESSION['question'];
             $data['answers'] = $_SESSION['answers'];
-            $data['progress'] = $usedQuestions;
+            $data['progress'] = $assignment->getUsedQuestions();
 
         shuffle($data['answers']);
 

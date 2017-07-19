@@ -90,7 +90,7 @@
                 encode: true            // Encodes the data
             }).done(function(data){
             //running a function once the call is finished.
-
+                console.log(data);
             //Decoding the data we get back as a JSON object.
                 var response    = JSON.parse(data);
                 
@@ -187,6 +187,7 @@
                     datatype: 'json',
                     encode: true
                 }).done(function(data){
+                    console.log(data);
                     var newQuestion = JSON.parse(data);
 
                     console.log(newQuestion);

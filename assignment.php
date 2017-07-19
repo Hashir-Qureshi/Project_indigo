@@ -1,7 +1,14 @@
-<?php require 'Functions.php';
+<?php 
+spl_autoload_register(function($class){
+    include $class.'.class.php';
+});
+
 require 'Login.confirmation.php';
-if(empty($_SESSION['usedQuestions'][0])) {
-    query();
+
+$assignment = $_SESSION['assignment'];
+
+if($assignment->getUsedQuestions() == null) {
+    $assignment->generateQuestion();
 }
 ?>
 
