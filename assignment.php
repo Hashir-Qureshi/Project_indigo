@@ -31,7 +31,7 @@ if($assignment->getUsedQuestions() == null) {
 
     <div class="container ">
         <div class="row">
-            <div id="progress" class="col-md-2"><?php echo "Progress: ".sizeof($assignment->getUsedQuestions())."/".$assignment->getMaxQuestions(); ?></div>
+            <div id="progress" class="wrap-stuff col-md-2"><?php echo "Progress: ".sizeof($assignment->getUsedQuestions())."/".$assignment->getMaxQuestions(); ?></div>
             <div id="assignment" class=" coloring col-md-8 wrap-assignment">
                 <div id="question" class=" padding text-align: center;" style="font-size: 24px; font-family: 'Zilla Slab', Serif; font-weight: bold;" >
                     <?php echo $_SESSION['question'][0]; ?>
@@ -39,7 +39,7 @@ if($assignment->getUsedQuestions() == null) {
                  </div>
 
             <form id="myForm">
-                <div id="answers" style="text-align: left; font-size">
+                <div id="answers" style="text-align: left; font-size: 20px;">
                     <?php  $answers = $_SESSION['answers']; shuffle($answers);
                     foreach ($answers as $answer):?>
 
