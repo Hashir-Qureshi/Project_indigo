@@ -45,7 +45,7 @@
         var changeBtn = $('input[name=change]');
         var submitBtn = $('input[name=check]');
         var inputs = $('input[name=answer]');
-        var question = $('h2#question');
+        var question = $('div#question');
 
         if(attempt === 2){
             submitBtn.hide();
