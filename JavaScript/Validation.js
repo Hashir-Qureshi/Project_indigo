@@ -7,8 +7,9 @@
     //Declaring the variables for keeping track of the attempts and progress
         var attempt;
         var progress;
-        var maxQuestions = parseInt(localStorage.getItem('maxQuestions'));
+        var maxQuestions;
         var finishBtn = $('input[name=finish]');
+        var progDisplay = $('div#progress');
 
 
 
@@ -26,14 +27,12 @@
     // Same thing as the attempt variable, but will be used to determine their progress.
         if(localStorage.getItem('progress') !== null){
             progress = parseInt(localStorage.getItem('progress'));
+            maxQuestions = localStorage.getItem('maxQuestions');
+            progDisplay.text("Progress = "+progress+"/"+maxQuestions);
         }else{
             progress = 1;
         }
     // This variable will be used to keep a copy of the previous label so we can remove all css from it.
-
-        var progDisplay = $('div#progress');
-
-        progDisplay.text("Progress = "+progress+"/"+maxQuestions);
 
         var choice;
 
@@ -190,9 +189,12 @@
                     console.log(data);
                     var newQuestion = JSON.parse(data);
 
+
                     console.log(newQuestion);
                     localStorage.setItem('progress', newQuestion.progress);
+                    localStorage.setItem('maxQuestions', newQuestion.maxQuestions);
                     progress = newQuestion.progress;
+                    maxQuestions = newQuestion.maxQuestions;
 
                     question.text(newQuestion.question);
                     progDisplay.text("Progress = "+progress+"/"+ maxQuestions);

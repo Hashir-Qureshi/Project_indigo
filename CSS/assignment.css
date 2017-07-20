@@ -6,27 +6,7 @@
 	background-color: #90EE90;
 }
 
-.container{
-	display: flex;
-	justify-content:center;
+.wrapper{
+	margin-top: 100px;
+	
 }
-
-.container > div{
-	margin: 10px;
-}
-
-.first{
-
-	width:200px;
-	}
-
-.second{
-	width:400px;
-	padding:5px;
-	overflow-wrap: break-word;
-	}
-
-.third{
-	width:200px;
-	overflow-wrap: break-word;
-} 

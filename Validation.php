@@ -17,7 +17,8 @@ spl_autoload_register(function($class){
     $data = array(
         'question' => $_SESSION['question'],
         'answers' => $_SESSION['answers'],
-        'progress' => $assignment->getUsedQuestions()
+        'progress' => sizeof($assignment->getUsedQuestions()),
+        'maxQuestions' => $assignment->getMaxQuestions()
     );
 
 
@@ -49,7 +50,7 @@ spl_autoload_register(function($class){
 
             $result['correct'] = true;
 
-            if($assignment->getUsedQuestions() == $assignment->getMaxQuestions()){
+            if(sizeof($assignment->getUsedQuestions()) == $assignment->getMaxQuestions()){
                 $postGrade = "UPDATE students
                         SET HW_1_Grade = ".$_SESSION['score']."
                             WHERE Empl_ID = ".$_SESSION['pass'];
@@ -72,7 +73,7 @@ spl_autoload_register(function($class){
 
                 $_SESSION['try'] = 0;
 
-                if($assignment->getUsedQuestions() == $assignment->getMaxQuestions()){
+                if(sizeof($assignment->getUsedQuestions()) == $assignment->getMaxQuestions()){
                     $postGrade = "UPDATE students
                         SET HW_1_Grade = ".$_SESSION['score']."
                             WHERE Empl_ID = ".$_SESSION['pass'];
@@ -97,7 +98,7 @@ spl_autoload_register(function($class){
             $assignment->generateQuestion();
             $data['question'] = $_SESSION['question'];
             $data['answers'] = $_SESSION['answers'];
-            $data['progress'] = $assignment->getUsedQuestions();
+            $data['progress'] = sizeof($assignment->getUsedQuestions());
 
         shuffle($data['answers']);
 
