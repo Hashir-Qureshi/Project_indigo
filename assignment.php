@@ -1,7 +1,14 @@
-<?php require 'Functions.php';
+<?php
+spl_autoload_register(function($class){
+    include $class.'.class.php';
+});
+
 require 'Login.confirmation.php';
-if(empty($_SESSION['usedQuestions'][0])) {
-    query();
+
+$assignment = $_SESSION['assignment'];
+
+if($assignment->getUsedQuestions() == null) {
+    $assignment->generateQuestion();
 }
 ?>
 
@@ -16,6 +23,7 @@ if(empty($_SESSION['usedQuestions'][0])) {
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="JavaScript/jquery-3.2.1.js"></script>
         <script src="JavaScript/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="CSS/bootstrap.min.css">
         <script src="JavaScript/Validation.js"></script>
         <link rel="stylesheet" href="CSS/assignment.css">
     </head>
@@ -23,7 +31,7 @@ if(empty($_SESSION['usedQuestions'][0])) {
 
     <div class="container ">
         <div class="row">
-            <div class="wrap-stuff col-md-2" style="text-align: left;">This is the progress</div>
+            <div id="progress" class="col-md-2"><?php echo "Progress: ".sizeof($assignment->getUsedQuestions())."/".$assignment->getMaxQuestions(); ?></div>
             <div id="assignment" class=" coloring col-md-8 wrap-assignment">
                 <div id="question" class=" padding text-align: center;" style="font-size: 24px; font-family: 'Zilla Slab', Serif; font-weight: bold;" >
                     <?php echo $_SESSION['question'][0]; ?>

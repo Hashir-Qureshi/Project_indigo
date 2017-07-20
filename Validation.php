@@ -1,18 +1,27 @@
-<?php require_once 'Functions.php';
-      require_once 'config/DB.connection.php';
-session_start();
+<?php 
+
+
+spl_autoload_register(function($class){
+    include $class.'.class.php';
+});
+
+    require_once 'config/DB.connection.php';
+
+    session_start();
+    $assignment = $_SESSION['assignment'];
 
     $result = array(
-        'correct' => false
+        'correct' => false,
     );
-
 
     $data = array(
         'question' => $_SESSION['question'],
         'answers' => $_SESSION['answers'],
-        'progress' => sizeof($_SESSION['usedQuestions'], 1) - 3,
-        'usedQuestions' => $_SESSION['usedQuestions']
-);
+        'progress' => sizeof($assignment->getUsedQuestions()),
+        'maxQuestions' => $assignment->getMaxQuestions()
+    );
+
+
     if(isset($_POST['answer'])){
         $answer = $_POST['answer'];
 
@@ -41,7 +50,7 @@ session_start();
 
             $result['correct'] = true;
 
-            if((sizeof($_SESSION['usedQuestions'], 1) - 3) == $_SESSION['MaxQuestions']){
+            if(sizeof($assignment->getUsedQuestions()) == $assignment->getMaxQuestions()){
                 $postGrade = "UPDATE students
                         SET HW_1_Grade = ".$_SESSION['score']."
                             WHERE Empl_ID = ".$_SESSION['pass'];
@@ -64,7 +73,7 @@ session_start();
 
                 $_SESSION['try'] = 0;
 
-                if((sizeof($_SESSION['usedQuestions'], 1) - 3) == $_SESSION['MaxQuestions']){
+                if(sizeof($assignment->getUsedQuestions()) == $assignment->getMaxQuestions()){
                     $postGrade = "UPDATE students
                         SET HW_1_Grade = ".$_SESSION['score']."
                             WHERE Empl_ID = ".$_SESSION['pass'];
@@ -86,11 +95,10 @@ session_start();
 
 
             // Choose a new question and its answers and set the correct key to true
-            query();
+            $assignment->generateQuestion();
             $data['question'] = $_SESSION['question'];
             $data['answers'] = $_SESSION['answers'];
-            $data['progress'] = sizeof($_SESSION['usedQuestions'], 1) - 3;
-            $data['usedQuestions'] = $_SESSION['usedQuestions'];
+            $data['progress'] = sizeof($assignment->getUsedQuestions());
 
         shuffle($data['answers']);
 

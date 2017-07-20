@@ -7,7 +7,10 @@
     //Declaring the variables for keeping track of the attempts and progress
         var attempt;
         var progress;
+        var maxQuestions;
         var finishBtn = $('input[name=finish]');
+        var progDisplay = $('div#progress');
+
 
 
     // Getting the attempt and progress variables from local storage.
@@ -24,14 +27,12 @@
     // Same thing as the attempt variable, but will be used to determine their progress.
         if(localStorage.getItem('progress') !== null){
             progress = parseInt(localStorage.getItem('progress'));
+            maxQuestions = localStorage.getItem('maxQuestions');
+            progDisplay.text("Progress = "+progress+"/"+maxQuestions);
         }else{
             progress = 1;
         }
     // This variable will be used to keep a copy of the previous label so we can remove all css from it.
-
-        var progDisplay = $('div#progress');
-
-        progDisplay.text("Progress = "+progress+"/12");
 
         var choice;
 
@@ -88,11 +89,10 @@
                 encode: true            // Encodes the data
             }).done(function(data){
             //running a function once the call is finished.
-
+                console.log(data);
             //Decoding the data we get back as a JSON object.
                 var response    = JSON.parse(data);
-
-
+                
                 if(response.correct){
                 // The correct key in our object was set to true, which means the answer was correct.
 
@@ -104,7 +104,7 @@
                 // Hide the submit button.
                     submitBtn.hide();
                 // The following if/else will check to see if the answered question was the last question.
-                    if(progress === 12){
+                    if(progress === maxQuestions){
                     // The question was the last one. Display the finish button to let the user finish the assignment.
                         finishBtn.show();
                     // Change the text of the flag to reflect the status of the assignment.
@@ -132,7 +132,7 @@
 
                         submitBtn.hide();
 
-                        if(progress === 12){
+                        if(progress === maxQuestions){
                         // The user answered the last question of the assignment.
                             flag.text("Wrong! Click \"View Grade\" to see how you did.");
                             finishBtn.show();
@@ -186,14 +186,18 @@
                     datatype: 'json',
                     encode: true
                 }).done(function(data){
+                    console.log(data);
                     var newQuestion = JSON.parse(data);
+
 
                     console.log(newQuestion);
                     localStorage.setItem('progress', newQuestion.progress);
+                    localStorage.setItem('maxQuestions', newQuestion.maxQuestions);
                     progress = newQuestion.progress;
+                    maxQuestions = newQuestion.maxQuestions;
 
                     question.text(newQuestion.question);
-                    progDisplay.text("Progress = "+progress+"/12");
+                    progDisplay.text("Progress = "+progress+"/"+ maxQuestions);
                     inputs.each(function (i) {
                         $(this).next().text(newQuestion.answers[i]);
                         $(this).val(newQuestion.answers[i]);

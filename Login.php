@@ -19,11 +19,12 @@
     <!-- CSS stylesheet -->
     <link rel="stylesheet"  type="text/css" href="CSS/Loginstylesheet.css">
     <!-- Fonts -->
-    <link href="/fonts/Roboto" rel="stylesheet">
+    <link href="fonts/" type="images">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="/JavaScript/jquery-3.2.1.js"></script>
+    <script src="JavaScript/jquery-3.2.1.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="JavaScript/bootstrap.min.js"></script>
+    
 </head>
 
 <body>
