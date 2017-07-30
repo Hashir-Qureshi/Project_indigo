@@ -56,13 +56,13 @@
             flag.text("Wrong! Click on \"Next Question\" to go to the next question.");
             flag.css('backgroundColor', '#F08080');
             flag.show();
-            choice.prop('checked', true);
+            choice.prop('checked', true); // re-checking the choice that the user had chosen.
             choice.parent().addClass('wrong');
         }else if(attempt === 1){
             flag.text("Wrong! Try 1 more time for .75 points");
             flag.css('backgroundColor', '#F08080');
             flag.show();
-            choice.prop('checked', true);
+            choice.prop('checked', true); // re-checking the choice that the user had chosen.
             choice.parent().addClass('wrong');
         }
 
@@ -194,9 +194,9 @@
 
                     console.log(newQuestion);
                     localStorage.setItem('progress', newQuestion.progress); //Saving the new progress from the server to restore the state of the assignment.
-                    localStorage.setItem('maxQuestions', newQuestion.maxQuestions);
+                    localStorage.setItem('maxQuestions', newQuestion.maxQuestions); // saving the max questions from the server to restore the state of the assignment.
                     progress = newQuestion.progress; //putting the new progress from the server in a variable so we can work with it.
-                    maxQuestions = newQuestion.maxQuestions;
+                    maxQuestions = newQuestion.maxQuestions; //putting the new progress from the server in a variable so we can work with it.
 
                     question.text(newQuestion.question); // changing the question to the new question from the server.
                     progDisplay.text("Progress = "+progress+"/"+ maxQuestions); // Changing the progress to reflect the current progress.
