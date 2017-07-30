@@ -1,8 +1,8 @@
 
 
 //Running the script only when the document has loaded.
-    $(document).ready(function(){   
-    
+    $(document).ready(function(){
+
         var flag = $('#flag'); //Getting the element which will be used to display any useful info like errors
 
     //Declaring the variables for keeping track of the attempts and progress
@@ -10,6 +10,7 @@
         var progress;
         var maxQuestions = parseInt(localStorage.getItem('maxQuestions'));
         var finishBtn = $('input[name=finish]');
+        var progDisplay = $('div#progress'); //Grabbing the div that will display the progress.
 
 
 
@@ -26,13 +27,11 @@
     // Same thing as the attempt variable, but will be used to determine their progress.
         if(localStorage.getItem('progress') !== null){
             progress = parseInt(localStorage.getItem('progress'));
+            maxQuestions = localStorage.getItem('maxQuestions');
+            progDisplay.text("Progress = "+progress+"/"+maxQuestions);
         }else{
             progress = 1;
         }
-
-        var progDisplay = $('div#progress'); //Grabbing the div that will display the progress.
-
-        progDisplay.text("Progress = "+progress+"/"+maxQuestions); //Setting the initial progress wehen the page loads.
 
         var choice;
 
@@ -47,7 +46,7 @@
         var changeBtn = $('input[name=change]');
         var submitBtn = $('input[name=check]');
         var inputs = $('input[name=answer]');
-        var question = $('h2#question');
+        var question = $('div#question');
 
 
         //Restoring the state of the assignment if the page is refreshed or the user leaves and comes back in the middle of answering.
@@ -94,7 +93,7 @@
             }).done(function(data){
             //running a function once the call is finished.
                 console.log(data);
-            
+
                 var response    = JSON.parse(data); //Decoding the data we get back as a JSON object.
                 
                 //The Following if/else will determine if the user answered correctly or incorrectly.
@@ -106,16 +105,16 @@
                     flag.show();
 
                     choice.parent().addClass('correct'); // Set the background color of the chosen answer to light green as well.
-                
+
                     submitBtn.hide(); // Hide the submit button.
 
                 // The following if/else will check to see if the answered question was the last question in the assignment.
                     if(progress === maxQuestions){
-                    // The question was the last one. 
+                    // The question was the last one.
                         finishBtn.show(); //Display the finish button to let the user finish the assignment.
                         flag.text("Correct! Click \"View Grade\" to see how you did."); // Change the text of the flag to reflect the status of the assignment.
                     }else{
-                    // The question was not the last question. 
+                    // The question was not the last question.
                         changeBtn.show(); //Display the button that will change the question.
                         flag.text("Correct! Click \"Next Question\" to go to the next question."); // Change the text of the flag to reflect the status of the assignment.
                     }
@@ -187,14 +186,17 @@
                     datatype: 'json',
                     encode: true
                 }).done(function(data){
-                    
+
                     console.log(data);
 
                     var newQuestion = JSON.parse(data); //Decoding the Server's response as a json object.
 
+
                     console.log(newQuestion);
                     localStorage.setItem('progress', newQuestion.progress); //Saving the new progress from the server to restore the state of the assignment.
-                    progress = newQuestion.progress; //putting the new progress from the server in a variable so we can work with it. 
+                    localStorage.setItem('maxQuestions', newQuestion.maxQuestions);
+                    progress = newQuestion.progress; //putting the new progress from the server in a variable so we can work with it.
+                    maxQuestions = newQuestion.maxQuestions;
 
                     question.text(newQuestion.question); // changing the question to the new question from the server.
                     progDisplay.text("Progress = "+progress+"/"+ maxQuestions); // Changing the progress to reflect the current progress.

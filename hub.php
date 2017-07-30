@@ -77,36 +77,10 @@
     <html>
         <head>
         <script src="JavaScript/jquery-3.2.1.js"></script>
-        <script>
-
-        $(document).ready(function(){
-            $(document).on('click',':submit' , function(){
-                var maxQuestions;
-
-                switch($(this).value()){
-                    case 1:
-                    case 2:
-                       maxQuestions = 12;
-                       break;
-                    case 3:
-                        maxQuestions = 10;
-                        break;
-
-                }
-
-                localStorage.setItem('maxQuestions', maxQuestions);
-                $('#hiddenText').val($(this).val());
-
-            });
-        });
-
-
-        </script>
         </head>
         <body>
             <?php echo "Logged in as: ".$_SESSION['user'];?>
             <form id="myForm" action="hub.php" method="post">
-                <input id="hiddenText" type="text" name="choice" style="display:none">
                 <input type="submit" name="choice" value="1" <?php echo  ($assignments['1'] != "Available") ? "disabled" : ""; ?> >
                 <input type="submit" name="choice" value="2" <?php echo  ($assignments['2'] != "Available") ? "disabled" : ""; ?> >
                 <input type="submit" name="choice" value="3" <?php echo  ($assignments['3'] != "Available") ? "disabled" : ""; ?> >

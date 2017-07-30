@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'].'/Project_indigo/config/DB.connection.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/Project_Indigo/config/DB.connection.php';
 
     $error = $user = $pass = "";
 
