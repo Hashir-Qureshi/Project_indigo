@@ -2,19 +2,19 @@
 
 //Running the script only when the document has loaded.
     $(document).ready(function(){
-    //Getting the element which will be used to display any useful info like errors
-        var flag = $('#flag');
+
+        var flag = $('#flag'); //Getting the element which will be used to display any useful info like errors
+
     //Declaring the variables for keeping track of the attempts and progress
         var attempt;
         var progress;
-        var maxQuestions;
+        var maxQuestions = parseInt(localStorage.getItem('maxQuestions'));
         var finishBtn = $('input[name=finish]');
-        var progDisplay = $('div#progress');
+        var progDisplay = $('div#progress'); //Grabbing the div that will display the progress.
 
 
 
     // Getting the attempt and progress variables from local storage.
-    // This is a fail-safe to ensure that the user can't refresh the page and have unlimited tries.
         if(localStorage.getItem('attempt') !== null){
         // The user had already attempted the question.
         // Grab the the attempt variable from local storage and convert it into an int.
@@ -32,35 +32,37 @@
         }else{
             progress = 1;
         }
-    // This variable will be used to keep a copy of the previous label so we can remove all css from it.
 
         var choice;
 
+        //Getting the choice that the user had chosen before they left the page.
         if(localStorage.getItem('choice') !== null){
             var value = localStorage.getItem('choice');
            choice = $("input[value='"+value+"']");
         }
 
         
-    // Grabbing the buttons to change the question, submit the answer, and finish the assignment.
+    // Grabbing the buttons to change the question, submit the answer, finish the assignment, and all the answer radio buttons and the question div.
         var changeBtn = $('input[name=change]');
         var submitBtn = $('input[name=check]');
         var inputs = $('input[name=answer]');
         var question = $('h3#question');
 
+
+        //Restoring the state of the assignment if the page is refreshed or the user leaves and comes back in the middle of answering.
         if(attempt === 2){
             submitBtn.hide();
             changeBtn.show();
             flag.text("Wrong! Click on \"Next Question\" to go to the next question.");
             flag.css('backgroundColor', '#F08080');
             flag.show();
-            choice.prop('checked', true);
+            choice.prop('checked', true); // re-checking the choice that the user had chosen.
             choice.parent().addClass('wrong');
         }else if(attempt === 1){
             flag.text("Wrong! Try 1 more time for .75 points");
             flag.css('backgroundColor', '#F08080');
             flag.show();
-            choice.prop('checked', true);
+            choice.prop('checked', true); // re-checking the choice that the user had chosen.
             choice.parent().addClass('wrong');
         }
 
@@ -68,11 +70,12 @@
     // Grabbing the main form and adding an event listener to it.
         $('#myForm').on('submit', function(event){
 
-        // Preventing the form from submitting and reloading the page.
-            event.preventDefault();
-        // Grabbing the user's chosen radio button.
-            choice = $('input[name=answer]:checked');
-            localStorage.setItem('choice', choice.val());
+            event.preventDefault(); // Preventing the form from submitting and reloading the page.
+
+            choice = $('input[name=answer]:checked');  // Grabbing the user's chosen radio button.
+
+            localStorage.setItem('choice', choice.val()); // Saving the choice so we can restore the state on reload.
+
         // Setting up the json object that will be sent to be validated.
             var answer = {
             // Contains the value of the user's choice.
@@ -90,34 +93,35 @@
             }).done(function(data){
             //running a function once the call is finished.
                 console.log(data);
-            //Decoding the data we get back as a JSON object.
-                var response    = JSON.parse(data);
+
+                var response    = JSON.parse(data); //Decoding the data we get back as a JSON object.
                 
+                //The Following if/else will determine if the user answered correctly or incorrectly.
                 if(response.correct){
                 // The correct key in our object was set to true, which means the answer was correct.
 
                 // Set the background of the flag div to light green and show it.
                     flag.css('backgroundColor', '#90EE90');
                     flag.show();
-                // Set the background color of the chosen answer to light green as well.
-                    choice.parent().addClass('correct');
-                // Hide the submit button.
-                    submitBtn.hide();
-                // The following if/else will check to see if the answered question was the last question.
+
+                    choice.parent().addClass('correct'); // Set the background color of the chosen answer to light green as well.
+
+                    submitBtn.hide(); // Hide the submit button.
+
+                // The following if/else will check to see if the answered question was the last question in the assignment.
                     if(progress === maxQuestions){
-                    // The question was the last one. Display the finish button to let the user finish the assignment.
-                        finishBtn.show();
-                    // Change the text of the flag to reflect the status of the assignment.
-                        flag.text("Correct! Click \"View Grade\" to see how you did.");
+                    // The question was the last one.
+                        finishBtn.show(); //Display the finish button to let the user finish the assignment.
+                        flag.text("Correct! Click \"View Grade\" to see how you did."); // Change the text of the flag to reflect the status of the assignment.
                     }else{
-                    // The question was not the last question. display the button that will change the question.
-                        changeBtn.show();
-                        flag.text("Correct! Click \"Next Question\" to go to the next question.");
+                    // The question was not the last question.
+                        changeBtn.show(); //Display the button that will change the question.
+                        flag.text("Correct! Click \"Next Question\" to go to the next question."); // Change the text of the flag to reflect the status of the assignment.
                     }
-                // Checks to see if the user had gotten the question wrong before getting it right
-                // if they had, then we need to change the background of the last incorrect label.
+
+                // Checks to see if the user had already attempted the question once.
                     if(attempt === 1){
-                        $('.wrong').removeClass('wrong');
+                        $('.wrong').removeClass('wrong'); // if they had, then we need to remove the background from the previous choice.
                     }
 
 
@@ -128,40 +132,37 @@
                 // The user answered incorrectly.
 
                     if(attempt === 1){
-                    // This was their second attempt.
+                    // The user had attempted the answer once.
 
-                        submitBtn.hide();
+                        submitBtn.hide(); //Hide the submit button so they can't answer again.
 
                         if(progress === maxQuestions){
                         // The user answered the last question of the assignment.
-                            flag.text("Wrong! Click \"View Grade\" to see how you did.");
-                            finishBtn.show();
+                            flag.text("Wrong! Click \"View Grade\" to see how you did."); // Change the text of the flag to reflect the status of the assignment.
+                            finishBtn.show(); //show the finish button and let the user finish the assignment.
                         }else{
                         // There are still more questions to be answered.
-                            flag.text("Wrong! Click on \"Next Question\" to go to the next question.");
-                            changeBtn.show();
+                            flag.text("Wrong! Click on \"Next Question\" to go to the next question."); // Change the text of the flag to reflect the status of the assignment.
+                            changeBtn.show(); // Show the next question button and let the user chnage the question.
                         }
-                    // Change the background color of the flag to light red to signify that the answer was incorrect.
-                        flag.css('backgroundColor', '#F08080');
-                        flag.show();
-                        $('.wrong').removeClass('wrong');
-                        choice.parent().addClass('wrong');
+                        flag.css('backgroundColor', '#F08080'); // Change the background color of the flag to light red to signify that the answer was incorrect.
+                        flag.show(); //Show the flag
+                        $('.wrong').removeClass('wrong'); // remove the wrong class from the previous wrong answer.
+                        choice.parent().addClass('wrong'); // add the wrong class to the current wrong answer's label
 
 
                     }else{
                     // This was their first attempt.
-                        flag.text("Wrong! Try 1 more time for .75 points");
-                        flag.css('backgroundColor', '#F08080');
-                        flag.show();
-                        choice.parent().addClass('wrong');
-                    // Set attempt to 1 and store it in the local storage to be safe.
+                        flag.text("Wrong! Try 1 more time for .75 points"); // Change the text of the flag to reflect the status of the assignment.
+                        flag.css('backgroundColor', '#F08080'); // Change the background color of the flag to light red to signify that the answer was incorrect.
+                        flag.show(); //Show the flag
+                        choice.parent().addClass('wrong'); // add the wrong class to the current wrong answer's label.
                     }
 
                 }
 
-
-                attempt++;
-                localStorage.setItem('attempt', attempt);
+                attempt++; // increment attempt because the user attempted to answer the question.
+                localStorage.setItem('attempt', attempt); // save the attempt variable so we could restore the atate of the assignment.
 
             });
 
@@ -171,10 +172,9 @@
         });
 
         // Attaching the event listener to the Next Question button
-        // We first need to unbind any click event listeners. The button is attached
-        // this listener every time the form is submitted so we need to unbind the previous ones.
-            changeBtn.unbind('click').on('click', function() {
+            changeBtn.on('click', function() {
 
+                //Setting up the request to the server to change the question.
                 var request = {
                     'change' : true
                 };
@@ -186,45 +186,47 @@
                     datatype: 'json',
                     encode: true
                 }).done(function(data){
+
                     console.log(data);
-                    var newQuestion = JSON.parse(data);
+
+                    var newQuestion = JSON.parse(data); //Decoding the Server's response as a json object.
 
 
                     console.log(newQuestion);
-                    localStorage.setItem('progress', newQuestion.progress);
-                    localStorage.setItem('maxQuestions', newQuestion.maxQuestions);
-                    progress = newQuestion.progress;
-                    maxQuestions = newQuestion.maxQuestions;
+                    localStorage.setItem('progress', newQuestion.progress); //Saving the new progress from the server to restore the state of the assignment.
+                    localStorage.setItem('maxQuestions', newQuestion.maxQuestions); // saving the max questions from the server to restore the state of the assignment.
+                    progress = newQuestion.progress; //putting the new progress from the server in a variable so we can work with it.
+                    maxQuestions = newQuestion.maxQuestions; //putting the new progress from the server in a variable so we can work with it.
 
-                    question.text(newQuestion.question);
-                    progDisplay.text("Progress = "+progress+"/"+ maxQuestions);
+                    question.text(newQuestion.question); // changing the question to the new question from the server.
+                    progDisplay.text("Progress = "+progress+"/"+ maxQuestions); // Changing the progress to reflect the current progress.
+                    // looping through each radio button
                     inputs.each(function (i) {
-                        $(this).next().next().text(newQuestion.answers[i]);
-                        $(this).val(newQuestion.answers[i]);
-                        $(this).parent().attr('id', newQuestion.answers[i])
-                        
+                        // The answers array from the server has the correct answer and 3 wrong choices.
+                        // The array is also already shuffled do we don't have to worry about randomizing.
+
+                        $(this).next().next().text(newQuestion.answers[i]); // changing the text of the span tag for the radio button to the answer choice at index i in the answers array.
+                        $(this).val(newQuestion.answers[i]); // changing the value of the radio button to the answer choice at index i in the answers array.
+                        $(this).parent().attr('id', newQuestion.answers[i]) //Changing the id of the label for the radio buttonb to the answer choice at index i in the answers array.
                     });
-
-
 
                 });
 
-                flag.hide();
-                choice.parent().removeClass('correct');
-                $('.wrong').removeClass('wrong');
-                choice.prop('checked', false);
-                changeBtn.hide();
-                submitBtn.show();
-                attempt = 0;
-                localStorage.setItem('attempt', attempt);
-
+                flag.hide(); // hiding the flag because a new question will be displayed.
+                choice.parent().removeClass('correct'); // removing the correct class from the label
+                $('.wrong').removeClass('wrong'); // removing the wrong class from everything that has it.
+                choice.prop('checked', false); // resseting the chosen radio button to unchecked state.
+                changeBtn.hide(); //hiding the next question button.
+                submitBtn.show(); // showing the submit button.
+                attempt = 0; // resetting attempt.
+                localStorage.setItem('attempt', attempt); // saving attempt so we can restore the state of the assignment.
 
             });
 
-
+            // attaching the event handler to the button that finishes the assingment.
             finishBtn.on('click', function(){
-                localStorage.clear();
-                window.location = "Confirmation.php";
+                localStorage.clear(); // clear all variables from local storage.
+                window.location = "Confirmation.php"; // take the user to the confirmation page.
             });
     });
 
