@@ -46,7 +46,7 @@
         var changeBtn = $('input[name=change]');
         var submitBtn = $('input[name=check]');
         var inputs = $('input[name=answer]');
-        var question = $('div#question');
+        var question = $('h3#question');
 
         if(attempt === 2){
             submitBtn.hide();
@@ -199,7 +199,7 @@
                     question.text(newQuestion.question);
                     progDisplay.text("Progress = "+progress+"/"+ maxQuestions);
                     inputs.each(function (i) {
-                        $(this).next().text(newQuestion.answers[i]);
+                        $(this).next().next().text(newQuestion.answers[i]);
                         $(this).val(newQuestion.answers[i]);
                         $(this).parent().attr('id', newQuestion.answers[i])
                         
