@@ -4,7 +4,7 @@
     $(document).ready(function(){
 
         var flag = $('#flag'); //Getting the element which will be used to display any useful info like errors
-
+        var hint = $('div#assignment');
     //Declaring the variables for keeping track of the attempts and progress
         var attempt;
         var progress;
@@ -153,6 +153,7 @@
 
                     }else{
                     // This was their first attempt.
+                        hint.popover('show');
                         flag.text("Wrong! Try 1 more time for .75 points"); // Change the text of the flag to reflect the status of the assignment.
                         flag.css('backgroundColor', '#F08080'); // Change the background color of the flag to light red to signify that the answer was incorrect.
                         flag.show(); //Show the flag
@@ -162,7 +163,7 @@
                 }
 
                 attempt++; // increment attempt because the user attempted to answer the question.
-                localStorage.setItem('attempt', attempt); // save the attempt variable so we could restore the atate of the assignment.
+                localStorage.setItem('attempt', attempt); // save the attempt variable so we could restore the state of the assignment.
 
             });
 
@@ -203,15 +204,15 @@
                     // looping through each radio button
                     inputs.each(function (i) {
                         // The answers array from the server has the correct answer and 3 wrong choices.
-                        // The array is also already shuffled do we don't have to worry about randomizing.
+                        // The array is also already shuffled so we don't have to worry about randomizing.
 
                         $(this).next().next().text(newQuestion.answers[i]); // changing the text of the span tag for the radio button to the answer choice at index i in the answers array.
                         $(this).val(newQuestion.answers[i]); // changing the value of the radio button to the answer choice at index i in the answers array.
-                        $(this).parent().attr('id', newQuestion.answers[i]) //Changing the id of the label for the radio buttonb to the answer choice at index i in the answers array.
+                        $(this).parent().attr('id', newQuestion.answers[i]) //Changing the id of the label for the radio button to the answer choice at index i in the answers array.
                     });
 
                 });
-
+                hint.popover('hide');
                 flag.hide(); // hiding the flag because a new question will be displayed.
                 choice.parent().removeClass('correct'); // removing the correct class from the label
                 $('.wrong').removeClass('wrong'); // removing the wrong class from everything that has it.
@@ -229,4 +230,7 @@
                 window.location = "Confirmation.php"; // take the user to the confirmation page.
             });
     });
-
+        function closePopover() {
+            $('div#assignment').popover('hide');
+        }
+    

@@ -20,9 +20,11 @@ if($assignment->getUsedQuestions() == null) {
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="JavaScript/jquery-3.2.1.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
         <script src="JavaScript/Validation.js"></script>
         <link rel="stylesheet" href="CSS/assignment.css">
+
     </head>
     <body id="edit">
     <hr style="margin-top: 50px; margin-bottom: 0; height:1px;border:none;color:#333;background-color:#333;">
@@ -35,7 +37,7 @@ if($assignment->getUsedQuestions() == null) {
 
             <div class="container">
                 <div class="row">
-            <div id="assignment" class=" wrap-assignment card coloring col-md-8 offset-md-2">
+            <div id="assignment" class=" card coloring col-md-8 offset-md-2" data-toggle="popover" data-trigger="manual" data-html="true" data-title="Hint <button class='close' onclick='closePopover()'><span>&times;</span></button>" data-content="<?php echo $_SESSION['question'][0]; ?>" >
                 <h3 id="question" class="card-header" style=" text-align: center; font-size: 24px; font-family: 'Zilla Slab', Serif; font-weight: bold;" >
                     <?php echo $_SESSION['question'][0]; ?>
 
