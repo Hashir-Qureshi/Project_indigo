@@ -15,7 +15,7 @@
     <title>Login Page</title>
 
     <!-- Bootstrap -->
-    <link href="CSS/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <!-- CSS stylesheet -->
     <link rel="stylesheet"  type="text/css" href="CSS/Loginstylesheet.css">
     <!-- Fonts -->
@@ -23,14 +23,15 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="JavaScript/jquery-3.2.1.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="JavaScript/bootstrap.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     
 </head>
 
 <body>
 <div class="container">
     <div class="row">
-        <div class="wrap-login col-md-4 col-md-offset-4 ">
+        <div class="wrap-login col-md-4 offset-md-4 ">
             <h2 class="text-center" style="margin-bottom: 30px; font-family:'Roboto', sans-serif; font-weight: bold; color:#283593;">CHESS</h2>
             <form action="Login.php" method="POST">
                 <div class="form-group">

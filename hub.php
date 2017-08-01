@@ -49,10 +49,11 @@
 
 
         if(!empty($_POST['choice'])) {            
+            $_SESSION['choice'] = $_POST['choice'];
 
             switch($_POST['choice']){
                 case 1:
-                    $assignment = new Assignment(12, $assignmentChapters["assignment_1"], 3, $conn);
+                    $assignment = new Assignment(12, $assignmentChapters["assignment_1"], 4, $conn);
                     break;
                 case 2:
                     $assignment = new Assignment(12, $assignmentChapters["assignment_2"], 3, $conn);

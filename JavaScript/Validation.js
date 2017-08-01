@@ -10,7 +10,7 @@
         var progress;
         var maxQuestions = parseInt(localStorage.getItem('maxQuestions'));
         var finishBtn = $('input[name=finish]');
-        var progDisplay = $('div#progress'); //Grabbing the div that will display the progress.
+        var progDisplay = $('.progress-bar'); //Grabbing the div that will display the progress.
 
 
 
@@ -28,6 +28,7 @@
         if(localStorage.getItem('progress') !== null){
             progress = parseInt(localStorage.getItem('progress'));
             maxQuestions = localStorage.getItem('maxQuestions');
+
             progDisplay.text("Progress = "+progress+"/"+maxQuestions);
         }else{
             progress = 1;
@@ -212,7 +213,8 @@
                     maxQuestions = newQuestion.maxQuestions; //putting the new progress from the server in a variable so we can work with it.
 
                     question.text(newQuestion.question); // changing the question to the new question from the server.
-                    progDisplay.text("Progress = "+progress+"/"+ maxQuestions); // Changing the progress to reflect the current progress.
+                    progDisplay.css('width', ((progress/maxQuestions)*100)+"%");
+                    progDisplay.text(progress+"/"+ maxQuestions); // Changing the progress to reflect the current progress.
                     // looping through each radio button
                     inputs.each(function (i) {
                         // The answers array from the server has the correct answer and 3 wrong choices.
