@@ -121,6 +121,7 @@
 
                 // Checks to see if the user had already attempted the question once.
                     if(attempt === 1){
+                        hint.popover('dispose');
                         $('.wrong').removeClass('wrong'); // if they had, then we need to remove the background from the previous choice.
                     }
 
@@ -153,7 +154,18 @@
 
                     }else{
                     // This was their first attempt.
-                        hint.popover('show');
+                        hint.popover({
+                            title:"Hint <button class='close' onclick='closePopover()'><span>&times;</span></button>",
+                            html: true, 
+                            trigger: "manual",
+                            content: response.hint, 
+                            placement: function(){
+                                    if(window.innerWidth < 1339){
+                                        return 'bottom'
+                                    }else return 'right'
+                            }
+                         });
+                        hint.popover("show");
                         flag.text("Wrong! Try 1 more time for .75 points"); // Change the text of the flag to reflect the status of the assignment.
                         flag.css('backgroundColor', '#F08080'); // Change the background color of the flag to light red to signify that the answer was incorrect.
                         flag.show(); //Show the flag
@@ -212,7 +224,7 @@
                     });
 
                 });
-                hint.popover('hide');
+                hint.popover('dispose');
                 flag.hide(); // hiding the flag because a new question will be displayed.
                 choice.parent().removeClass('correct'); // removing the correct class from the label
                 $('.wrong').removeClass('wrong'); // removing the wrong class from everything that has it.
@@ -231,6 +243,6 @@
             });
     });
         function closePopover() {
-            $('div#assignment').popover('hide');
+            $('div#assignment').popover('dispose');
         }
     

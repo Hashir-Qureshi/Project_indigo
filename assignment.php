@@ -37,7 +37,7 @@ if($assignment->getUsedQuestions() == null) {
 
             <div class="container">
                 <div class="row">
-            <div id="assignment" class=" card coloring col-md-8 offset-md-2" data-toggle="popover" data-trigger="manual" data-html="true" data-title="Hint <button class='close' onclick='closePopover()'><span>&times;</span></button>" data-content="<?php echo $_SESSION['question'][0]; ?>" >
+            <div id="assignment" class=" card coloring col-md-8 col-sm-12 offset-md-2">
                 <h3 id="question" class="card-header" style=" text-align: center; font-size: 24px; font-family: 'Zilla Slab', Serif; font-weight: bold;" >
                     <?php echo $_SESSION['question'][0]; ?>
 
@@ -68,9 +68,5 @@ if($assignment->getUsedQuestions() == null) {
              </div>
             </div>
          </div>
-            <div class="row">
-                <div id="hint" class="wrap-hint col-md-3 offset-md-9" style="text-align: center; display: none">This is the Hint</div>
-            </div>
-
     </body>
     </html>
