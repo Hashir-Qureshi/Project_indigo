@@ -32,17 +32,17 @@ $progress = (sizeof($assignment->getUsedQuestions())/$assignment->getMaxQuestion
 
     </head>
     <body id="edit">
-    <hr style="margin-top: 50px; margin-bottom: 0; height:1px;border:none;color:#333;background-color:#333;">
+    <hr style="margin-top: 50px; margin-bottom: 0; height:1px; border:none; color:#333; background-color:#333;">
 
-            <div id="progress" class="progress" style="margin-top: 0"  >
-                <div class="progress-bar" style= <?php echo '"width: '.$progress.'%"'; ?> >
-                        <?php echo sizeof($assignment->getUsedQuestions()).'/'.$assignment->getMaxQuestions(); ?>
+            <div id="progress" class="progress" style="margin-top: 0;">
+                <div class="progress-bar" style= <?php echo '"width: '.$progress.'%; height:25px; background-color:indigo;"'; ?> >
+                        <h6 style="padding:2px;"><?php echo sizeof($assignment->getUsedQuestions()).'/'.$assignment->getMaxQuestions(); ?></h6>
                 </div>
             </div>
 
             <div class="container">
                 <div class="row">
-                    <div id="assignment" class=" card coloring col-md-8 col-sm-12 col-xs-12 offset-md-2">
+                    <div id="assignment" class=" wrap-assignment card coloring col-md-8 col-sm-12 col-xs-12 offset-md-2">
                         <h3 id="question" class="card-header" style=" text-align: center; font-size: 24px; font-family: 'Zilla Slab', Serif; font-weight: bold;" >
                         <?php echo $_SESSION['question'][0]; ?>
 
