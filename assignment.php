@@ -61,9 +61,9 @@ $progress = (sizeof($assignment->getUsedQuestions())/$assignment->getMaxQuestion
                                     </label> <br>
 
                                 <?php endforeach; ?>
-                                <div id="flag" style="display:none; width:100%; font-weight: bold;"></div>
                             </div>
                             <div style="margin-top: 10px">
+                                <div id="flag" style="display:none; width:100%; font-weight: bold;"></div>
                                 <input type="submit" name="check" value="Grade Me!" class="btn-assignment btn btn-default btn-primary btn-block"><br>
                                 <input type="button" style="display:none" name="change" value="Next Question" class="btn-assignment btn btn-default btn-primary btn-block">
                                 <input type="button" style="display:none" name="finish" value="View Grade" class="btn-assignment btn btn-default btn-primary btn-block" >

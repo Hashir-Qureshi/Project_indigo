@@ -39,7 +39,20 @@
         //Getting the choice that the user had chosen before they left the page.
         if(localStorage.getItem('choice') !== null){
             var value = localStorage.getItem('choice');
-           choice = $("input[value='"+value+"']");
+             console.log(value);
+           choice = $('input[value="'+value+'"]');
+
+           hint.popover({
+                            title:"Hint <button class='close' onclick='closePopover()'><span>&times;</span></button>",
+                            html: true, 
+                            trigger: "manual",
+                            content: localStorage.getItem('hint'), 
+                            placement: function(){
+                                    if(window.innerWidth < 1339){
+                                        return 'bottom'
+                                    }else return 'right'
+                            }
+                         });
         }
 
         
@@ -53,18 +66,68 @@
         //Restoring the state of the assignment if the page is refreshed or the user leaves and comes back in the middle of answering.
         if(attempt === 2){
             submitBtn.hide();
-            changeBtn.show();
-            flag.text("Wrong! Click on \"Next Question\" to go to the next question.");
-            flag.css('backgroundColor', '#F08080');
-            flag.show();
             choice.prop('checked', true); // re-checking the choice that the user had chosen.
-            choice.parent().addClass('wrong');
+            switch(parseInt(localStorage.getItem('status'))){
+                case 0:            
+                        if(progress === maxQuestions){
+                            // The user answered the last question of the assignment.
+                                flag.text("Wrong! Click \"View Grade\" to see how you did."); // Change the text of the flag to reflect the status of the assignment.
+                                finishBtn.show(); //show the finish button and let the user finish the assignment.
+                        }else{
+                            // There are still more questions to be answered.
+                                flag.text("Wrong! Click on \"Next Question\" to go to the next question."); // Change the text of the flag to reflect the status of the assignment.
+                                changeBtn.show(); // Show the next question button and let the user chnage the question.
+                            }
+                        flag.addClass('alert-danger');
+                        choice.parent().addClass('alert-danger');
+                    break;
+                case 1:
+                        if(progress === maxQuestions){
+                        // The question was the last one.
+                            finishBtn.show(); //Display the finish button to let the user finish the assignment.
+                            flag.text("Correct! Click \"View Grade\" to see how you did."); // Change the text of the flag to reflect the status of the assignment.
+                        }else{
+                        // The question was not the last question.
+                            changeBtn.show(); //Display the button that will change the question.
+                            flag.text("Correct! Click \"Next Question\" to go to the next question."); // Change the text of the flag to reflect the status of the assignment.
+                        }
+                        flag.addClass('alert-success');
+                        choice.parent().addClass('alert-success'); 
+                    break;
+            }
+            flag.show();
+
+
+
         }else if(attempt === 1){
-            flag.text("Wrong! Try 1 more time for .75 points");
-            flag.css('backgroundColor', '#F08080');
-            flag.show();
             choice.prop('checked', true); // re-checking the choice that the user had chosen.
-            choice.parent().addClass('wrong');
+            switch(parseInt(localStorage.getItem('status'))){
+
+                case 0:
+                        hint.popover("show");
+                        flag.text("Wrong! Try 1 more time for .75 points");
+                        flag.addClass('alert-danger');
+                        choice.parent().addClass('alert-danger');
+                    break;
+                case 1:
+                        submitBtn.hide();
+                        if(progress === maxQuestions){
+                        // The question was the last one.
+                            finishBtn.show(); //Display the finish button to let the user finish the assignment.
+                            flag.text("Correct! Click \"View Grade\" to see how you did."); // Change the text of the flag to reflect the status of the assignment.
+                        }else{
+                        // The question was not the last question.
+                            changeBtn.show(); //Display the button that will change the question.
+                            flag.text("Correct! Click \"Next Question\" to go to the next question."); // Change the text of the flag to reflect the status of the assignment.
+                        }
+                        flag.addClass('alert-success');
+                        choice.parent().addClass('alert-success');
+                        break;
+
+            
+            }
+            flag.show();
+
         }
 
 
@@ -101,11 +164,22 @@
                 if(response.correct){
                 // The correct key in our object was set to true, which means the answer was correct.
 
+                localStorage.setItem('status', 1);
+
+                // Checks to see if the user had already attempted the question once.
+                    if(attempt === 1){
+                        hint.popover('dispose');
+                        flag.removeClass('alert-danger');
+                        $('.alert-danger').removeClass('alert-danger'); // if they had, then we need to remove the background from the previous choice.
+                    }
+
+
+
                 // Set the background of the flag div to light green and show it.
-                    flag.css('backgroundColor', '#90EE90');
+                    flag.addClass('alert-success');
                     flag.show();
 
-                    choice.parent().addClass('correct'); // Set the background color of the chosen answer to light green as well.
+                    choice.parent().addClass('alert-success'); // Set the background color of the chosen answer to light green as well.
 
                     submitBtn.hide(); // Hide the submit button.
 
@@ -120,11 +194,6 @@
                         flag.text("Correct! Click \"Next Question\" to go to the next question."); // Change the text of the flag to reflect the status of the assignment.
                     }
 
-                // Checks to see if the user had already attempted the question once.
-                    if(attempt === 1){
-                        hint.popover('dispose');
-                        $('.wrong').removeClass('wrong'); // if they had, then we need to remove the background from the previous choice.
-                    }
 
 
 
@@ -133,9 +202,11 @@
                 }else{
                 // The user answered incorrectly.
 
+                    localStorage.setItem('status', 0);
+
                     if(attempt === 1){
                     // The user had attempted the answer once.
-
+                        hint.popover('dispose');
                         submitBtn.hide(); //Hide the submit button so they can't answer again.
 
                         if(progress === maxQuestions){
@@ -147,10 +218,10 @@
                             flag.text("Wrong! Click on \"Next Question\" to go to the next question."); // Change the text of the flag to reflect the status of the assignment.
                             changeBtn.show(); // Show the next question button and let the user chnage the question.
                         }
-                        flag.css('backgroundColor', '#F08080'); // Change the background color of the flag to light red to signify that the answer was incorrect.
                         flag.show(); //Show the flag
-                        $('.wrong').removeClass('wrong'); // remove the wrong class from the previous wrong answer.
-                        choice.parent().addClass('wrong'); // add the wrong class to the current wrong answer's label
+                        $('.alert-danger').removeClass('alert-danger'); // remove the wrong class from the previous wrong answer.
+                        flag.addClass('alert-danger')
+                        choice.parent().addClass('alert-danger'); // add the wrong class to the current wrong answer's label
 
 
                     }else{
@@ -168,15 +239,16 @@
                          });
                         hint.popover("show");
                         flag.text("Wrong! Try 1 more time for .75 points"); // Change the text of the flag to reflect the status of the assignment.
-                        flag.css('backgroundColor', '#F08080'); // Change the background color of the flag to light red to signify that the answer was incorrect.
+                        flag.addClass('alert-danger'); // Change the background color of the flag to light red to signify that the answer was incorrect.
                         flag.show(); //Show the flag
-                        choice.parent().addClass('wrong'); // add the wrong class to the current wrong answer's label.
+                        choice.parent().addClass('alert-danger'); // add the wrong class to the current wrong answer's label.
                     }
 
                 }
 
                 attempt++; // increment attempt because the user attempted to answer the question.
                 localStorage.setItem('attempt', attempt); // save the attempt variable so we could restore the state of the assignment.
+                localStorage.setItem('hint', response.hint);
 
             });
 
@@ -228,8 +300,9 @@
                 });
                 hint.popover('dispose');
                 flag.hide(); // hiding the flag because a new question will be displayed.
-                choice.parent().removeClass('correct'); // removing the correct class from the label
-                $('.wrong').removeClass('wrong'); // removing the wrong class from everything that has it.
+                flag.removeClass();
+                choice.parent().removeClass('alert-success'); // removing the correct class from the label
+                $('.alert-danger').removeClass('alert-danger'); // removing the wrong class from everything that has it.
                 choice.prop('checked', false); // resseting the chosen radio button to unchecked state.
                 changeBtn.hide(); //hiding the next question button.
                 submitBtn.show(); // showing the submit button.
