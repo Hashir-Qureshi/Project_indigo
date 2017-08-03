@@ -31,8 +31,12 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="wrap-login col-md-4 offset-md-4 ">
-            <h2 class="text-center" style="margin-bottom: 30px; font-family:'Roboto', sans-serif; font-weight: bold; color:#283593;">CHESS</h2>
+        <div class="wrap-login col-md-5 offset-md-3 ">
+            <div class="" style="background-color: #283593; padding:5px; padding-top:8px; margin-bottom: 30px; border-radius: 5px;">
+                <h2 class="text-center" style=" font-family:'Roboto', sans-serif; font-weight: bold; color:#fff;">C.H.E.S.S</h2>
+                <div class="text-center" style=" margin-top: 0;font-family:'Roboto', sans-serif; font-weight: bold; color:#fff;">Computerized Homework Exercise SyStem</div>
+            </div>
+
             <form action="Login.php" method="POST">
                 <div class="form-group">
                     <label>

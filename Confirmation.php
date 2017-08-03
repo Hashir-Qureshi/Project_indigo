@@ -40,11 +40,12 @@ require_once 'config/DB.connection.php';
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
             <script src="JavaScript/Validation.js"></script>
             <link rel="stylesheet" href="CSS/assignment.css">
+            <link href="css/Header.css" rel="stylesheet">
         </head>
         <body>
-        <hr style="margin-top: 50px; margin-bottom: 0; height:1px;border:none;color:#333;background-color:#333;">
-        <hr style="margin-top: 30px; margin-bottom: 0; height:1px;border:none;color:#333;background-color:#333;">
-        <div class="container" style="font-family: 'Zilla Slab', Serif;">
+        <?php include "header.php";?>
+
+        <div class="container" style="font-family: 'Zilla Slab', Serif; margin-top: 50px;">
             <div class="row">
                 <div class="wrap-assignment col-md-10 offset-md-1 card alert alert-success">
                     <div class="card-header alert-heading" style="text-align: center;">
@@ -54,11 +55,6 @@ require_once 'config/DB.connection.php';
                         <h4 >You Scored <?php echo $results[0] ?> out of <?php echo $assignment->getMaxQuestions(); ?></h4>
 
                         <button onclick="location.href='hub.php'" type="button" class="btn btn-assignment btn-default btn-primary btn-lg">Back to Hub</button>
-
-                        <form action="" method="POST">
-                            <input type="submit" class="btn btn-assignment btn-default btn-primary btn-lg" name="logout" value="Logout">
-                        </form>
-
                     </div>
                 </div>
             </div>

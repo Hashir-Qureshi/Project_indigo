@@ -29,14 +29,30 @@ $progress = (sizeof($assignment->getUsedQuestions())/$assignment->getMaxQuestion
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
         <script src="JavaScript/Validation.js"></script>
         <link rel="stylesheet" href="CSS/assignment.css">
+        <link href="css/Header.css" rel="stylesheet">
 
     </head>
     <body id="edit">
-    <hr style="margin-top: 50px; margin-bottom: 0; height:1px; border:none; color:#333; background-color:#333;">
+    <nav class="navbar fixed-top first-navbar" style="text-align: center; margin-bottom:0;">
+            <div class="navbar-text py-0">
+              <div class="navbar-header">
+                  <span href="" style="font-family:'Roboto', sans-serif; color:#fff;"><b>C.H.E.S.S</b></span>
+                  <div style="font-family:'Roboto', sans-serif; color:#fff;">Computerized Homework Exercise SyStem</div>
+              </div>
+            </div>
+        </nav>
 
-            <div id="progress" class="progress" style="margin-top: 0;">
+        <nav class="navbar fixed-top" style="background-color: #333; margin-top:53.5938px; text-align: center; margin-bottom:0;">
+            <div class="navbar-text py-0">
+                <div class="navbar-header">
+                    <span class="float-left" href="" style="font-family:'Roboto', sans-serif; color:#fff;"><b><?php echo "Logged in as: ".$_SESSION['user'];?></b></span>
+                </div>
+            </div>
+        </nav>
+
+            <div id="progress" class="progress" style="margin-top: 95px;">
                 <div class="progress-bar" style= <?php echo '"width: '.$progress.'%; height:25px; background-color:indigo;"'; ?> >
-                        <h6 style="padding:2px;"><?php echo sizeof($assignment->getUsedQuestions()).'/'.$assignment->getMaxQuestions(); ?></h6>
+                        <h6 id="progDisplay" style="padding:2px;"><?php echo sizeof($assignment->getUsedQuestions()).'/'.$assignment->getMaxQuestions(); ?></h6>
                 </div>
             </div>
 
