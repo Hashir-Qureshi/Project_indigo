@@ -228,10 +228,10 @@
                     }else{
                     // This was their first attempt.
                         hint.popover({
-                            title:"Hint <button class='close' onclick='closePopover()'><span>&times;</span></button>",
+                            title:"<span style='font-family: \"Source Sans Pro\", Serif; font-weight: bold;'> Hint <button class='close' onclick='closePopover()'><span>&times;</span></button>",
                             html: true, 
                             trigger: "manual",
-                            content: response.hint, 
+                            content: "<p style='font-family: \"Droid Sans\", sans-serif;' >"+response.hint+"</p>", 
                             placement: function(){
                                     if(window.innerWidth < 1339){
                                         return 'bottom'

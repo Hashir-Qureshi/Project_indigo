@@ -73,6 +73,8 @@
 <!Doctype html>
 <html>
     <head>
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <script src="JavaScript/jquery-3.2.1.js"></script>
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -96,11 +98,11 @@
           <img src="images/image1.png" class=" img-responsive float-left" style="height: 100%;">
             <div class="card" style="min-height: 260px; max-height: 260px;">
               <div class="card-block">
-                 <h4 class="card-title">Assignment 1</h4>
+                 <h4 class="card-title" style="font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">Assignment 1</h4>
                   <div class="card-text" style=" max-height: 130px; overflow:auto;">
-                        <p >
-                        This assignment is comprised of chapters 1, 2, 3 and 5 from your textbook. 
-                        </p>  
+                        <p style="font-family: 'Droid Sans', sans-serif;">
+                        This assignment is comprised of chapters 1, 2, 3 and 5 from your textbook.
+                        </p>
                   </div>
               </div>
               <div class="align-bottom" style="padding-bottom: 5px; padding-left: 5px; padding-right: 5px; text-align: center;">
@@ -108,7 +110,7 @@
                        <button type="submit" class="btn btn-primary float-left"  name="choice" value="1" <?php echo  (in_array("1", $All_assignments) AND $grades[0] == NULL) ? "" : "disabled"; ?> >
                             <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start</button>
                             <span class="btn btn-outline-success disabled float-right" style="cursor:default;">
-                                <?php 
+                                <?php
 
                                     if(in_array("1", $All_assignments)){
                                         if($grades[0] != NULL){
@@ -135,11 +137,11 @@
           <img src="images/image1.png" class=" img-responsive float-left" style="height: 100%;">
             <div class="card" style="min-height: 260px; max-height: 260px;">
               <div class="card-block">
-                 <h4 class="card-title">Assignment 2</h4>
+                 <h4 class="card-title" style="font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">Assignment 2</h4>
                   <div class="card-text" style=" max-height: 130px; overflow:auto;">
-                        <p >
+                        <p style="font-family: 'Droid Sans', sans-serif;">
                         This assignment is comprised of chapters 6, 7, 8 and 9 from your textbook.
-                      </p>  
+                      </p>
                   </div>
               </div>
               <div class="align-bottom" style="padding-bottom: 5px; padding-left: 5px; padding-right: 5px; text-align: center;">
@@ -147,7 +149,7 @@
                        <button type="submit" class="btn btn-primary float-left"  name="choice" value="2" <?php echo  (in_array("2", $All_assignments) AND $grades[1] == NULL) ? "" : "disabled"; ?> >
                             <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start</button>
                             <span class="btn btn-outline-success disabled float-right" style="cursor:default;">
-                                <?php 
+                                <?php
 
                                     if(in_array("2", $All_assignments)){
                                         if($grades[1] != NULL){
@@ -174,9 +176,9 @@
           <img src="images/image1.png" class=" img-responsive float-left" style="height: 100%;">
             <div class="card" style="min-height: 260px; max-height: 260px;">
               <div class="card-block">
-                 <h4 class="card-title">Assignment 3</h4>
+                 <h4 class="card-title" style="font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">Assignment 3</h4>
                   <div class="card-text" style=" max-height: 130px; overflow:auto;">
-                        <p >
+                        <p style="font-family: 'Droid Sans', sans-serif;">
                         This assignment is comprised of chapters 10, 11, 12 and 13 from your textbook.
                       </p>  
                   </div>
@@ -186,7 +188,7 @@
                        <button type="submit" class="btn btn-primary float-left"  name="choice" value="3" <?php echo  (in_array("3", $All_assignments) AND $grades[2] == NULL) ? "" : "disabled"; ?> >
                             <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start</button>
                             <span class="btn btn-outline-success disabled float-right" style="cursor:default;">
-                                <?php 
+                                <?php
 
                                     if(in_array("3", $All_assignments)){
                                         if($grades[2] != NULL){
