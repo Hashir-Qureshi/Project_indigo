@@ -76,6 +76,8 @@
 <!Doctype html>
 <html>
     <head>
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <script src="JavaScript/jquery-3.2.1.js"></script>
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -99,9 +101,9 @@
           <img src="images/image1.png" class=" img-responsive float-left" style="height: 100%;">
             <div class="card" style="min-height: 260px; max-height: 260px;">
               <div class="card-block">
-                 <h4 class="card-title">Assignment 1</h4>
+                 <h4 class="card-title" style="font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">Assignment 1</h4>
                   <div class="card-text" style=" max-height: 130px; overflow:auto;">
-                        <p >
+                        <p style="font-family: 'Droid Sans', sans-serif;">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -130,9 +132,9 @@
           <img src="images/image1.png" class=" img-responsive float-left" style="height: 100%;">
             <div class="card" style="min-height: 260px; max-height: 260px;">
               <div class="card-block">
-                 <h4 class="card-title">Assignment 2</h4>
+                 <h4 class="card-title" style="font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">Assignment 2</h4>
                   <div class="card-text" style=" max-height: 130px; overflow:auto;">
-                        <p >
+                        <p style="font-family: 'Droid Sans', sans-serif;">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -161,9 +163,9 @@
           <img src="images/image1.png" class=" img-responsive float-left" style="height: 100%;">
             <div class="card" style="min-height: 260px; max-height: 260px;">
               <div class="card-block">
-                 <h4 class="card-title">Assignment 3</h4>
-                  <div class="card-text" style=" max-height: 130px; overflow:auto;">
-                        <p >
+                 <h4 class="card-title" style="font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">Assignment 3</h4>
+                  <div class="card-text" style=" max-height: 130px; overflow:auto;" >
+                        <p style="font-family: 'Droid Sans', sans-serif;">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Login Page</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -33,8 +34,8 @@
     <div class="row">
         <div class="wrap-login col-md-4 offset-md-4 ">
             <div class="" style="background-color: #283593; padding:5px; padding-top:8px; margin-bottom: 30px; border-radius: 5px;">
-                <h2 class="text-center" style=" font-family:'Roboto', sans-serif; font-weight: bold; color:#fff;">C.H.E.S.S</h2>
-                <div class="text-center" style=" margin-top: 0;font-family:'Roboto', sans-serif; font-weight: bold; color:#fff;">Computerized Homework Exercise SyStem</div>
+                <h2 class="text-center" style=" font-family:'Roboto', sans-serif; font-weight: bold; color:#fff;">C.H.E.S.S.</h2>
+                <div class="text-center" style=" margin-top: 0; font-family:'Roboto Condensed', sans-serif; font-weight: bold; color:#fff;">Computerized Homework Exercise SyStem</div>
             </div>
 
             <form action="Login.php" method="POST">
