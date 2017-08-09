@@ -10,26 +10,23 @@
         }
     }
 
-    $assignments = array(
-            "1" => "Not Available",
-            "2" => "Not Available",
-            "3" => "Not Available"
-        );
 
     $query = "SELECT assignments.ID, students.HW_1_Grade, students.HW_2_Grade, students.HW_3_Grade from assignments, students WHERE (students.Empl_ID = 1) AND (assignments.Start_Date < NOW() AND assignments.End_Date > NOW())";
 
     
     $result = $conn->query($query);
 
+    $All_assignments = array();
 
     while ($row = mysqli_fetch_assoc($result)){
 
         $HW_Number = $row["ID"];
 
-        $assignments[$HW_Number] = ($row["HW_".$HW_Number."_Grade"] != NULL) ? "Not Available" : "Available";
+        array_push($All_assignments, $row["ID"]);
+
+        $grades = array($row["HW_1_Grade"], $row["HW_2_Grade"], $row["HW_3_Grade"]);
+
     }
-
-
 
 
 
@@ -44,7 +41,7 @@
     $assignmentChapters = array(
                 "assignment_1" => array('ch_1', 'ch_2', 'ch_3'),
                 "assignment_2" => array('ch_6', 'ch_7', 'ch_8', 'ch_9'),
-                "assignment_3" => array('ch_10', 'ch_11', 'ch_12', 'ch_13', 'ch_14')
+                "assignment_3" => array('ch_10', 'ch_11', 'ch_12', 'ch_13')
         );
 
 
@@ -59,7 +56,7 @@
                     $assignment = new Assignment(12, $assignmentChapters["assignment_2"], 3, $conn);
                     break;
                 case 3:
-                    $assignment = new Assignment(10, $assignmentChapters["assignment_3"], 2, $conn);
+                    $assignment = new Assignment(12, $assignmentChapters["assignment_3"], 3, $conn);
                     break;
 
             }
@@ -102,24 +99,32 @@
                  <h4 class="card-title">Assignment 1</h4>
                   <div class="card-text" style=" max-height: 130px; overflow:auto;">
                         <p >
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                      </p>  
+                        This assignment is comprised of chapters 1, 2, 3 and 5 from your textbook. 
+                        </p>  
                   </div>
               </div>
               <div class="align-bottom" style="padding-bottom: 5px; padding-left: 5px; padding-right: 5px; text-align: center;">
                     <form id="myForm" action="hub.php" method="post">
-                       <button type="submit" class="btn btn-primary float-left"  name="choice" value="1" <?php echo  ($assignments['1'] != "Available") ? "disabled" : ""; ?> >
-                          <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start</button>
-                        <button type="button" class="btn btn-default float-right">Default</button>
+                       <button type="submit" class="btn btn-primary float-left"  name="choice" value="1" <?php echo  (in_array("1", $All_assignments) AND $grades[0] == NULL) ? "" : "disabled"; ?> >
+                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start</button>
+                            <span class="btn btn-outline-success disabled float-right" style="cursor:default;">
+                                <?php 
+
+                                    if(in_array("1", $All_assignments)){
+                                        if($grades[0] != NULL){
+                                            echo $grades[0]."/12";
+                                        }else{
+                                            echo "Assignment incomplete";
+                                        }
+                                    }else{
+                                        if($grades[0] != NULL){
+                                            echo $grades[0]."/12";
+                                        }else{
+                                            echo  "Assignment Not Available";
+                                        }
+                                    }
+                                ?>
+                            </span>
                     </form>
               </div>
             </div>
@@ -133,30 +138,38 @@
                  <h4 class="card-title">Assignment 2</h4>
                   <div class="card-text" style=" max-height: 130px; overflow:auto;">
                         <p >
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        This assignment is comprised of chapters 6, 7, 8 and 9 from your textbook.
                       </p>  
                   </div>
               </div>
               <div class="align-bottom" style="padding-bottom: 5px; padding-left: 5px; padding-right: 5px; text-align: center;">
                     <form id="myForm" action="hub.php" method="post">
-                       <button type="submit" class="btn btn-primary float-left"  name="choice" value="2" <?php echo  ($assignments['2'] != "Available") ? "disabled" : ""; ?> >
-                          <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start</button>
-                        <button type="button" class="btn btn-default float-right">Default</button>
+                       <button type="submit" class="btn btn-primary float-left"  name="choice" value="2" <?php echo  (in_array("2", $All_assignments) AND $grades[1] == NULL) ? "" : "disabled"; ?> >
+                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start</button>
+                            <span class="btn btn-outline-success disabled float-right" style="cursor:default;">
+                                <?php 
+
+                                    if(in_array("2", $All_assignments)){
+                                        if($grades[1] != NULL){
+                                            echo $grades[1]."/12";
+                                        }else{
+                                            echo "Assignment incomplete";
+                                        }
+                                    }else{
+                                        if($grades[1] != NULL){
+                                            echo $grades[1]."/12";
+                                        }else{
+                                            echo  "Assignment Not Available";
+                                        }
+                                    }
+                                ?>
+                            </span>
                     </form>
               </div>
             </div>
           </div>
           </div>
-                  <div id="assignment3" class="row" style="max-height: 260px; margin-top: 50px;">
+        <div id="assignment3" class="row" style="max-height: 260px; margin-top: 50px;">
           <div class="col-md-12">
           <img src="images/image1.png" class=" img-responsive float-left" style="height: 100%;">
             <div class="card" style="min-height: 260px; max-height: 260px;">
@@ -164,29 +177,37 @@
                  <h4 class="card-title">Assignment 3</h4>
                   <div class="card-text" style=" max-height: 130px; overflow:auto;">
                         <p >
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        This assignment is comprised of chapters 10, 11, 12 and 13 from your textbook.
                       </p>  
                   </div>
               </div>
               <div class="align-bottom" style="padding-bottom: 5px; padding-left: 5px; padding-right: 5px; text-align: center;">
                     <form id="myForm" action="hub.php" method="post">
-                       <button type="submit" class="btn btn-primary float-left"  name="choice" value="3" <?php echo  ($assignments['3'] != "Available") ? "disabled" : ""; ?> >
-                          <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start</button>
-                        <button type="button" class="btn btn-default float-right">Default</button>
+                       <button type="submit" class="btn btn-primary float-left"  name="choice" value="3" <?php echo  (in_array("3", $All_assignments) AND $grades[2] == NULL) ? "" : "disabled"; ?> >
+                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start</button>
+                            <span class="btn btn-outline-success disabled float-right" style="cursor:default;">
+                                <?php 
+
+                                    if(in_array("3", $All_assignments)){
+                                        if($grades[2] != NULL){
+                                            echo $grades[2]."/12";
+                                        }else{
+                                            echo "Assignment incomplete";
+                                        }
+                                    }else{
+                                        if($grades[2] != NULL){
+                                            echo $grades[2]."/12";
+                                        }else{
+                                            echo  "Assignment Not Available";
+                                        }
+                                    }
+                                ?>
+                            </span>
                     </form>
-              </div>
+                </div>
             </div>
-          </div>
-          </div>
+            </div>
+        </div>
         </div>
     </body>
 </html>
