@@ -42,9 +42,13 @@
 
 		        array_push($this->usedQuestions, $Q_ID);
 
+
+
 		        $question_Query = "SELECT Question FROM ".$this->chapList[$this->index]." WHERE Q_ID=$Q_ID";
 
 		        $answer_Query = "SELECT Answer,W_Answer_1,W_Answer_2,W_Answer_3 FROM ".$this->chapList[$this->index]." WHERE Q_ID=$Q_ID";
+
+		        $Hint_Query = "SELECT Hint FROM ".$this->chapList[$this->index]." WHERE Q_ID=$Q_ID";
 
 				
 
@@ -56,6 +60,9 @@
        			$answers = $answers->fetch_array(MYSQLI_NUM);
        			$_SESSION['answers'] = $answers;
 
+       			$Hint = $this->connection->query($Hint_Query);
+       			$Hint = $Hint->fetch_array(MYSQLI_NUM);
+       			$_SESSION{'Hint'} = $Hint;
 		}
 
 		public function getMaxQuestions(){

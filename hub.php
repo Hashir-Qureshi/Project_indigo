@@ -101,7 +101,11 @@
                  <h4 class="card-title" style="font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">Assignment 1</h4>
                   <div class="card-text" style=" max-height: 130px; overflow:auto;">
                         <p style="font-family: 'Droid Sans', sans-serif;">
-                        This assignment is comprised of chapters 1, 2, 3 and 5 from your textbook.
+                        This assignment consists of:<br>
+                        <strong>Chapter 1</strong> - "Charting the Heavens: The Foundations of Astronomy"<br> 
+                        <strong>Chapter 2</strong> - "The Copernican Revolution: The Birth of Modern Science"<br> 
+                        <strong>Chapter 3</strong> - "Radiation: Information from the Cosmos"<br> 
+                        <strong>Chapter 5</strong> - "Telescopes: The Tools of Astronomy"
                         </p>
                   </div>
               </div>
@@ -140,7 +144,11 @@
                  <h4 class="card-title" style="font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">Assignment 2</h4>
                   <div class="card-text" style=" max-height: 130px; overflow:auto;">
                         <p style="font-family: 'Droid Sans', sans-serif;">
-                        This assignment is comprised of chapters 6, 7, 8 and 9 from your textbook.
+                        This assignment consists of:<br>
+                        <strong>Chapter 6</strong> - "The Solar System: Comparative Planetology and Formation Models"<br>
+                        <strong>Chapter 7</strong> - "Earth: Our Home in Space"<br>
+                        <strong>Chapter 8</strong> - "The Moon and Mercury: Scorched and Battered Worlds"<br>
+                        <strong>Chapter 9</strong> - "Venus: Earth’s Sister Planet"
                       </p>
                   </div>
               </div>
@@ -179,7 +187,11 @@
                  <h4 class="card-title" style="font-family: 'Source Sans Pro', sans-serif; font-weight: bold;">Assignment 3</h4>
                   <div class="card-text" style=" max-height: 130px; overflow:auto;">
                         <p style="font-family: 'Droid Sans', sans-serif;">
-                        This assignment is comprised of chapters 10, 11, 12 and 13 from your textbook.
+                        This assignment consists of:<br>
+                        <strong>Chapter 10</strong> - "Mars: A Near Miss for Life?"<br>
+                        <strong>Chapter 11</strong> - "Jupiter: Giant of the Solar System"<br>
+                        <strong>Chapter 12</strong> - "Saturn: Spectacular Rings and Mysterious Moons"<br>
+                        <strong>Chapter 13</strong> - "Uranus and Neptune: The Outer Worlds of the Solar System"
                       </p>  
                   </div>
               </div>

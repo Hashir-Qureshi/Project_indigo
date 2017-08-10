@@ -12,7 +12,7 @@ spl_autoload_register(function($class){
 
     $result = array(
         'correct' => false,
-        'hint' =>$_SESSION['question'][0]
+        'hint' =>$_SESSION['Hint'][0]
     );
 
     $data = array(
