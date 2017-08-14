@@ -48,7 +48,7 @@ $progress = (sizeof($assignment->getUsedQuestions())/$assignment->getMaxQuestion
         <nav class="navbar fixed-top" style="background-color: #333; margin-top:53.5938px; text-align: center; margin-bottom:0;">
             <div class="navbar-text py-0">
                 <div class="navbar-header">
-                    <span class="float-left" href="" style="font-family:'Roboto', sans-serif; color:#fff;"><b><?php echo "Logged in as: ".$_SESSION['user'];?></b></span>
+                    <span class="float-left" href="" style="font-family:'Roboto Condensed', sans-serif; color:#fff;"><b><?php echo "Logged in as: ".$_SESSION['user'];?></b></span>
                 </div>
             </div>
         </nav>
