@@ -16,7 +16,7 @@
             "3" => "Not Available"
         );
 
-    $query = "SELECT assignments.ID, students.HW_1_Grade, students.HW_2_Grade, students.HW_3_Grade from assignments, students WHERE (students.Empl_ID = 1) AND (assignments.Start_Date < NOW() AND assignments.End_Date > NOW())";
+    $query = "SELECT assignments.ID, students.HW_1_Grade, students.HW_2_Grade, students.HW_3_Grade from assignments, students WHERE (students.Empl_ID =".$_SESSION['pass'].") AND (assignments.Start_Date < NOW() AND assignments.End_Date > NOW())";
 
     
     $result = $conn->query($query);
