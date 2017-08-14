@@ -21,6 +21,9 @@ $progress = (sizeof($assignment->getUsedQuestions())/$assignment->getMaxQuestion
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title> Assignment </title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -36,8 +39,8 @@ $progress = (sizeof($assignment->getUsedQuestions())/$assignment->getMaxQuestion
     <nav class="navbar fixed-top first-navbar" style="text-align: center; margin-bottom:0;">
             <div class="navbar-text py-0">
               <div class="navbar-header">
-                  <span href="" style="font-family:'Roboto', sans-serif; color:#fff;"><b>C.H.E.S.S</b></span>
-                  <div style="font-family:'Roboto', sans-serif; color:#fff;">Computerized Homework Exercise SyStem</div>
+                  <span href="" style="font-family:'Roboto', sans-serif; color:#fff;"><b>C.H.E.S.S.</b></span>
+                  <div style="font-family:'Roboto Condensed', sans-serif; color:#fff;">Computerized Homework Exercise SyStem</div>
               </div>
             </div>
         </nav>
@@ -59,7 +62,7 @@ $progress = (sizeof($assignment->getUsedQuestions())/$assignment->getMaxQuestion
             <div class="container">
                 <div class="row">
                     <div id="assignment" class=" wrap-assignment card coloring col-md-8 col-sm-12 col-xs-12 offset-md-2">
-                        <h3 id="question" class="card-header" style=" text-align: center; font-size: 24px; font-family: 'Zilla Slab', Serif; font-weight: bold;" >
+                        <h3 id="question" class="card-header" style=" text-align: center; font-size: 24px; font-family: 'Source Sans Pro', Serif; font-weight: bold;" >
                         <?php echo $_SESSION['question'][0]; ?>
 
                         </h3>
@@ -70,7 +73,7 @@ $progress = (sizeof($assignment->getUsedQuestions())/$assignment->getMaxQuestion
                                 <?php  $answers = $_SESSION['answers']; shuffle($answers);
                                 foreach ($answers as $answer):?>
 
-                                    <label id="<?php echo $answer; ?>" class=" custom-control custom-radio"  style="font-family: 'Zilla Slab' , Serif; margin-bottom: -3%;" >
+                                    <label id="<?php echo $answer; ?>" class=" custom-control custom-radio"  style="font-family: 'Droid Sans', sans-serif; margin-bottom: -3%;" >
                                         <input class="custom-control-input" id="answer" type="radio" name="answer" value="<?php echo $answer; ?>">
                                         <span class="custom-control-indicator"></span>
                                         <span class="custom-control-description"> <?php echo $answer; ?></span>

@@ -18,7 +18,7 @@ require_once 'config/DB.connection.php';
         header('location: Login.php');
     }
 
-    $query = "SELECT HW_1_Grade from students WHERE Empl_ID = ".$_SESSION['pass'];
+    $query = "SELECT HW_".$_SESSION['choice']."_Grade from students WHERE Empl_ID = ".$_SESSION['pass'];
     $results = $conn->query($query);
 
     $results = $results->fetch_array(MYSQLI_NUM);
@@ -47,7 +47,7 @@ require_once 'config/DB.connection.php';
 
         <div class="container" style="font-family: 'Zilla Slab', Serif; margin-top: 50px;">
             <div class="row">
-                <div class="wrap-assignment col-md-10 offset-md-1 card alert alert-success">
+                <div class="wrap-assignment col-md-10 offset-md-1 card alert alert-success" style="margin-top:150px;">
                     <div class="card-header alert-heading" style="text-align: center;">
                         <h1>YOU HAVE COMPLETED ASSIGNMENT <?php echo $_SESSION['choice'];?></h1>
                     </div>
