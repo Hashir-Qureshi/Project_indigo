@@ -11,7 +11,7 @@
     }
 
 
-    $query = "SELECT assignments.ID, students.HW_1_Grade, students.HW_2_Grade, students.HW_3_Grade from assignments, students WHERE (students.Empl_ID =".$_SESSION['pass'].") AND (assignments.Start_Date < NOW() AND assignments.End_Date > NOW())";
+    $query = "SELECT ID FROM assignments WHERE Start_Date < NOW() AND End_Date > NOW()";
 
     
     $result = $conn->query($query);
@@ -24,10 +24,15 @@
 
         array_push($All_assignments, $row["ID"]);
 
-        $grades = array($row["HW_1_Grade"], $row["HW_2_Grade"], $row["HW_3_Grade"]);
-
     }
 
+    $query = "SELECT HW_1_Grade, HW_2_Grade, HW_3_Grade FROM students WHERE Empl_ID =".$_SESSION['pass']."";
+
+    $result = $conn->query($query);
+
+    $row = mysqli_fetch_assoc($result);
+
+        $grades = array($row["HW_1_Grade"], $row["HW_2_Grade"], $row["HW_3_Grade"]);
 
 
     $_SESSION['try']=0;
