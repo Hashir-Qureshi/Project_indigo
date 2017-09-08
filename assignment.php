@@ -36,6 +36,8 @@ $progress = (sizeof($assignment->getUsedQuestions())/$assignment->getMaxQuestion
 
     </head>
     <body id="edit">
+
+    <!-- First Navbar -->
     <nav class="navbar fixed-top first-navbar" style="text-align: center; margin-bottom:0;">
             <div class="navbar-text py-0">
               <div class="navbar-header">
@@ -44,7 +46,7 @@ $progress = (sizeof($assignment->getUsedQuestions())/$assignment->getMaxQuestion
               </div>
             </div>
         </nav>
-
+    <!-- Second Navbar -->
         <nav class="navbar fixed-top" style="background-color: #333; margin-top:53.5938px; text-align: center; margin-bottom:0;">
             <div class="navbar-text py-0">
                 <div class="navbar-header">
@@ -53,6 +55,7 @@ $progress = (sizeof($assignment->getUsedQuestions())/$assignment->getMaxQuestion
             </div>
         </nav>
 
+        <!-- Progress Bar -->
             <div id="progress" class="progress" style="margin-top: 95px;">
                 <div class="progress-bar" style= <?php echo '"width: '.$progress.'%; height:25px; background-color:indigo;"'; ?> >
                         <h6 id="progDisplay" style="padding:2px;"><?php echo sizeof($assignment->getUsedQuestions()).'/'.$assignment->getMaxQuestions(); ?></h6>

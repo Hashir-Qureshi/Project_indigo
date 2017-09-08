@@ -35,7 +35,7 @@
                 $_SESSION['user'] = $user;
                 $_SESSION['pass'] = $pass;
                 $_SESSION['loggedin'] = True;
-                header( 'location: hub.php');
+                header('location: hub.php');
                 exit;
             }
         }
