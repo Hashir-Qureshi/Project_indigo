@@ -77,8 +77,11 @@ $progress = (sizeof($assignment->getUsedQuestions())/$assignment->getMaxQuestion
                                 foreach ($answers as $answer):?>
 
                                     <label id="<?php echo $answer; ?>" class=" custom-control custom-radio"  style="font-family: 'Droid Sans', sans-serif; margin-bottom: -3%;" >
+
                                         <input class="custom-control-input" id="answer" type="radio" name="answer" value="<?php echo $answer; ?>">
+                                        
                                         <span class="custom-control-indicator"></span>
+
                                         <span class="custom-control-description"> <?php echo $answer; ?></span>
                                     </label> <br>
 

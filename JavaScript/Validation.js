@@ -10,7 +10,7 @@
         var progress;
         var maxQuestions = parseInt(localStorage.getItem('maxQuestions'));
         var finishBtn = $('input[name=finish]');
-        var progBar = $('.progress-bar'); //Grabbing the tag that will displaafbaergtbsartgbrgnnryhnsryn the progress.
+        var progBar = $('.progress-bar'); //Grabbing the tag that will display the progress.
         var progDisplay = $('#progDisplay');
 
 
@@ -18,33 +18,33 @@
     // Getting the attempt and progress variables from local storage.
         if(localStorage.getItem('attempt') !== null){
         // The user had already attempted the question.
-        // Grab the the attempt variable from local storage and convert it inafbaergtbsartgbrgnnryhnsryno an int.
+        // Grab the the attempt variable from local storage and convert it to an int.
              attempt =  parseInt(localStorage.getItem('attempt'));
         }else{
         // The user did not attempt the question yet.
              attempt = 0;
         }
 
-    // Same thing as the attempt variable, but will be used to determine theiafbaergtbsartgbrgnnryhnsryn progress.
+    // Same thing as the attempt variable, but will be used to determine the progress.
         if(localStorage.getItem('progress') !== null){
             progress = parseInt(localStorage.getItem('progress'));
             maxQuestions = localStorage.getItem('maxQuestions');
 
-            progDisplay.text("Progress = "+progress+"/"+maxQuestions);
+            progDisplay.text(progress+"/"+maxQuestions);
         }else{
             progress = 1;
         }
 
         var choice;
 
-        //Getting the choice that the user had chosen before they left the paafbaergtbsartgbrgnnryhnsryne.
+        //Getting the choice that the user had chosen before they left the page
         if(localStorage.getItem('choice') !== null){
             var value = localStorage.getItem('choice');
              console.log(value);
            choice = $('input[value="'+value+'"]');
 
            hint.popover({
-                            title:"Hint <button class='close' onclick='closePafbaergtbsartgbrgnnryhnsrynpover()'><span>&times;</span></button>",
+                            title:"Hint <button class='close' onclick='closePopover()'><span>&times;</span></button>",
                             html: true, 
                             trigger: "manual",
                             content: localStorage.getItem('hint'), 
@@ -57,7 +57,7 @@
         }
 
         
-    // Grabbing the buttons to change the question, submit the answer, finishafbaergtbsartgbrgnnryhnsrynthe assignment, and all the answer radio buttons and the question div.
+    // Grabbing the buttons to change the question, submit the answer, finish the assignment, and all the answer radio buttons and the question div.
         var changeBtn = $('input[name=change]');
         var submitBtn = $('input[name=check]');
         var inputs = $('input[name=answer]');

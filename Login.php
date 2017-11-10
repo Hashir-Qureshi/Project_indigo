@@ -51,6 +51,12 @@
                         Password
                     </label>
                 </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="Admin">
+                        Admin
+                    </label>
+                </div>
                 <button type="submit" class="btn-login btn btn-default btn-primary btn-block">Log in</button>
             </form>
         </div>
