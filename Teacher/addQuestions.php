@@ -35,5 +35,14 @@ $query = "SELECT * FROM questions where";
 <body>
 	<?php include(dirname(__DIR__).'/header.php'); ?>
 
+	<div class="container" style="margin-top: 150px;"> 
+		<div class="row">
+			<div>
+				<input type="checkbox" name="chapter">
+			</div>
+			
+		</div>
+	</div>
+
 </body>
 </html>

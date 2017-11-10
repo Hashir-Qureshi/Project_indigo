@@ -15,6 +15,8 @@ spl_autoload_register(function($class){
         'hint' =>$_SESSION['Hint'][0]
     );
 
+    
+
     $data = array(
         'question' => $_SESSION['question'],
         'answers' => $_SESSION['answers'],
