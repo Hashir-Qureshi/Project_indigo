@@ -18,17 +18,29 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Hub Page</title>
-</head>
+<head> </head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script src="../JavaScript/teacherHub.js"></script>
+
 <body>
-Welcome to the Hub Page <?php echo ucfirst($result['First_Name'])." ".ucfirst($result['Last_Name']); ?> 
-</br>
-<form action="" method="POST">
-	<button type="submit" name="logout">Logout</button></br>
-</form>
-<form action="addQuestions.php">
-<button>Add Questions</button>
-</form>
-</body>
+
+ 
+ 	<div class="wrapper" id="profile"><img src="https://pics.onsizzle.com/astronomeme-my-astronomy-binder-2725677.png"  style="width: 500px;height: 300px;"> 
+ 	</div>
+
+
+  
+  <div class="replacer" align="center"> 
+
+  	<input type="button" value="Add Course" id="addCourse"> <br/>
+
+  
+
+  </div>
+
+  </div>
+
+ </body>
 </html>
