@@ -40,6 +40,9 @@ $query = "SELECT * FROM questions where";
 	<?php include(dirname(__DIR__).'/header.php'); ?>
 
 	<div class="container" style="margin-top: 125px;"> 
+		<div class="modal fade" id="questionForm" tabindex="-1" role="dialog">
+			
+		</div>
 			<div class="row card">
 			<div class="card-header">
 	            <div class=" row form-inline d-flex justify-content-around">
@@ -59,11 +62,10 @@ $query = "SELECT * FROM questions where";
 	                  <span class="custom-control-description">Display All</span>
 	                </label>
 
+	                <button class="btn btn-primary" data-toggle="modal" data-toggle="questionForm" role="button">Add Question</button>
+
 	            </div>
-	            <div class="row">
-	            	
-	            	
-	            </div>
+
             </div>
         <div class="card-block table-responsive">
           <table id="questionsTable" class="table table-hover table-bordered mb-0">
@@ -79,7 +81,7 @@ $query = "SELECT * FROM questions where";
               </tr>
             </thead>
 
-            <tbody>
+            <tbody id="tableBody">
             
             </tbody>
           </table>
