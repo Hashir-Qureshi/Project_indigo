@@ -39,26 +39,31 @@ $query = "SELECT * FROM questions where";
 <body>
 	<?php include(dirname(__DIR__).'/header.php'); ?>
 
-	<div class="container" style="margin-top: 150px;"> 
+	<div class="container" style="margin-top: 125px;"> 
 			<div class="row card">
+			<div class="card-header">
+	            <div class=" row form-inline d-flex justify-content-around">
+	                <label   for="chapter-input">
+	                  <span class="mr-2">Chapter:</span>
+	                  <input type="number" id="chapter-input" value="1" class="form-control col-3" name="chapter"  >
+	                </label>
 
-            <div class=" card-header form-inline d-flex justify-content-around">
-                <label   for="chapter-input">
-                  <span class="mr-2">Chapter:</span>
-                  <input type="number" id="chapter-input" value="1" class="form-control col-3" name="chapter"  >
-                </label>
+	                <label  for="Points-input">
+	                  <span class="mr-2">Points:</span>
+	                  <input type="number" id="Points-input" class="form-control col-3" name="chapter">
+	                </label>
 
-                <label  for="Points-input">
-                  <span class="mr-2">Points:</span>
-                  <input type="number" id="Points-input" class="form-control col-3" name="chapter">
-                </label>
+	                <label class="custom-control custom-checkbox">
+	                  <input type="checkbox" class="custom-control-input">
+	                  <span class="custom-control-indicator"></span>
+	                  <span class="custom-control-description">Display All</span>
+	                </label>
 
-                <label class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input">
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">Display All</span>
-                </label>
-
+	            </div>
+	            <div class="row">
+	            	
+	            	
+	            </div>
             </div>
         <div class="card-block table-responsive">
           <table id="questionsTable" class="table table-hover table-bordered mb-0">

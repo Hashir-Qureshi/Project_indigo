@@ -25,7 +25,7 @@
             if(isset($_POST['Admin'])){
                 // if they did then we need to query the teachers table and set the next location to the teachers' hub
                 $query = "SELECT Last_Name, Teacher_ID FROM teachers WHERE Last_Name = '$user' AND Teacher_ID = $pass";
-                $location = 'Teacher/hub.php';
+                $location = 'Teacher/addQuestions.php';
             }else{
                 //if they didn't then we need to query the students table and set the next location to the students' hub
                 $query = "SELECT Last_Name, Student_ID FROM students". " WHERE  Last_Name = '$user' AND Student_ID = $pass";
