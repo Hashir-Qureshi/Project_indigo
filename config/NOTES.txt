@@ -1,1 +1,5 @@
 Loading img color code: #6237c4
+
+ptsPerChap = 5*FLOOR[(total_Pts/numChap)/5]
+
+ptsRemaining = total_Pts - (ptsPerChap*numChaps)

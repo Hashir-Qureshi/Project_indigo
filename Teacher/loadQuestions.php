@@ -16,6 +16,7 @@ if ($result != false) {
 		echo "<tr><td>".$row['Chapter']."</td>";
 		echo "<td>".$row['Question_Num']."</td>";
 		echo "<td>".$row['Question']."</td>";
+		echo "<td>".$row['Hint']."</td>";
 		echo "<td>".$row['Part_Num']."</td>";
 		echo "<td>".$row['Points']."</td></tr>";
 

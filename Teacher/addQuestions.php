@@ -68,6 +68,7 @@ $query = "SELECT * FROM questions where";
                 <th>Chapter</th>
                 <th>#</th>
                 <th>Question</th>
+                <th>Hint</th>
                 <th>Part Number</th>
                 <th>Points</th>
               </tr>
