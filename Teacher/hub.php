@@ -36,9 +36,11 @@ session_start();
 
   	<input type="button" value="Add Course" id="addCourse"> <br/>
 
-  
-
   </div>
+
+  <div class="courseList" id="courseList">
+ 	
+ 	
 
   </div>
 

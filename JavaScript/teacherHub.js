@@ -1,5 +1,27 @@
 $(document).ready(function(){
 
+displayCourses();
+
+
+//Query the database using ajax and display the courses that exist
+function displayCourses(){
+$.ajax({
+        type:"POST",
+        url: "listCourses.php",
+        dataType: "HTML",
+        encode: true
+        }).done(function(response){
+        
+        $("#courseList").html(response);
+
+        }); 
+
+};
+
+
+
+
+
 $('#addCourse').on("click", displayCourseForm );
 
 console.log("in JS");
@@ -42,7 +64,7 @@ alert('Please fill all fields');
 		"courseNum":courseNum
 
 	};
-
+//Add the course in the database
 $.ajax({
         type:"POST",
         url: "postCourses.php",
@@ -50,11 +72,9 @@ $.ajax({
         dataType: "json",
         encode: true
         }).done(function(response){
-     		
-        
-
-     		
-
+          //refreshing thw course list after adding the new course 
+            displayCourses();
+            console.log("Displayed the courses");
         }); 
 
 }
@@ -64,20 +84,5 @@ $.ajax({
 });
 
 }
-
-
-
-
-function courseOptions(){
-
-	var options =  "<div class='courseOptions'>"+
-  "	<button type = 'submit' name='editQ'>Edit Questions</button>"+
-  	"<button type = 'submit' name='submit'>Create Assignment</button>"+
-  	"<button type = 'submit' name='submit'>Check Status</button>"+
-  	"<button type = 'submit' name='submit'>View/Edit Assignments</button>";
-
-
-}
-
 
 });
