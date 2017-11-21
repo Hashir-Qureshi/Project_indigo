@@ -1,6 +1,11 @@
 $(document).ready(function(){
 
+
 displayCourses();
+
+
+displayaddCourseButton();
+
 
 
 //Query the database using ajax and display the courses that exist
@@ -21,7 +26,6 @@ $.ajax({
 
 
 
-
 $('#addCourse').on("click", displayCourseForm );
 
 console.log("in JS");
@@ -36,10 +40,10 @@ var content = "<form action='addCourse.php' id='courseAdd' method = 'post'>"+
   
   "<label for='courseNum'>Course Number</label> <input type='number' id='courseNum' name='courseNum'><br /><br />"+
   
-  "<button type = 'submit' name='submit'>Add</button>"+
+  "<button type = 'submit' id='submit' name='submit'>Add</button>"+
   "</form>";
    
-  
+
 $('.replacer').html(content );
 
 $('#courseAdd').on("submit", function(e){
@@ -75,7 +79,10 @@ $.ajax({
           //refreshing thw course list after adding the new course 
             displayCourses();
             console.log("Displayed the courses");
+            displayaddCourseButton();
         }); 
+
+
 
 }
 
@@ -84,5 +91,27 @@ $.ajax({
 });
 
 }
+
+
+
+
+
+
+function displayaddCourseButton(){
+
+
+ var content = "<div class='replacer' align='center'> "+
+
+    "<input type='button' value='Add Course' id='addCourse'> <br/></div>";
+
+
+
+  $('.replacer').html(content);
+
+ $('#addCourse').on("click", displayCourseForm );
+
+
+};
+
 
 });
