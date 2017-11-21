@@ -41,7 +41,36 @@ $query = "SELECT * FROM questions where";
 
 	<div class="container" style="margin-top: 125px;"> 
 		<div class="modal fade" id="questionForm" tabindex="-1" role="dialog">
-			
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header ">
+						<h4 class="col-12 modal-title text-center">Add Question</h4>
+					</div>
+					<form>
+					<div class="modal-body">
+
+						<div class="container-fluid">
+							<div class="row form-inline d-flex justify-content-around">
+
+								<label for="chapter-input" >
+			                  		<span class="mr-2">Chapter:</span>
+			                  		<input type="number" id="chapter-input" value="0" class="form-control" name="chapter" style="width: 80px;">
+			                	</label>
+
+				                <label  for="Points-input" class="">
+				                  <span class="mr-2">Points:</span>
+				                  <input type="number" id="Points-input" value="5" class="form-control" name="chapter" style="width: 80px;">
+				                </label>
+							</div>
+						</div>
+						<div class="row">
+							<label>Enter Question: <input type="textarea" name="Question"></label>
+						</div>
+
+					</div>
+					</form>
+				</div>
+			</div>
 		</div>
 			<div class="row card">
 			<div class="card-header">
@@ -62,7 +91,7 @@ $query = "SELECT * FROM questions where";
 	                  <span class="custom-control-description">Display All</span>
 	                </label>
 
-	                <button class="btn btn-primary" data-toggle="modal" data-toggle="questionForm" role="button">Add Question</button>
+	                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#questionForm">Add Question</button>
 
 	            </div>
 
