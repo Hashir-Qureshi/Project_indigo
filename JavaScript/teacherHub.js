@@ -95,8 +95,6 @@ $.ajax({
 
 
 
-
-
 function displayaddCourseButton(){
 
 
