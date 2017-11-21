@@ -22,7 +22,7 @@ $.ajax({
 	encode: true
 
 }).done(function(response){
-	$('#questionsTable > tbody:last-child').append(response);
+	$('#tableBody').html(response);
 
 });
 
@@ -39,7 +39,7 @@ function changeChapter(){
 	encode: true
 
 }).done(function(response){
-	$('#questionsTable > tbody:last-child').html(response);
+	$('#tableBody').html(response);
 
 });
 
