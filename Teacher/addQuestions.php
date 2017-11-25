@@ -32,7 +32,9 @@ $query = "SELECT * FROM questions where";
   crossorigin="anonymous"></script>	  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
     <script type="text/javascript" src="../JavaScript/loadQuestions.js"></script>
+    <script type="text/javascript" src="../JavaScript/inputAnswers.js"></script>
 
       
 </head>
@@ -40,49 +42,18 @@ $query = "SELECT * FROM questions where";
 	<?php include(dirname(__DIR__).'/header.php'); ?>
 
 	<div class="container" style="margin-top: 125px;"> 
-		<div class="modal fade" id="questionForm" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header ">
-						<h4 class="col-12 modal-title text-center">Add Question</h4>
-					</div>
-					<form>
-					<div class="modal-body">
 
-						<div class="container-fluid">
-							<div class="row form-inline d-flex justify-content-around">
-
-								<label for="chapter-input" >
-			                  		<span class="mr-2">Chapter:</span>
-			                  		<input type="number" id="chapter-input" value="0" class="form-control" name="chapter" style="width: 80px;">
-			                	</label>
-
-				                <label  for="Points-input" class="">
-				                  <span class="mr-2">Points:</span>
-				                  <input type="number" id="Points-input" value="5" class="form-control" name="chapter" style="width: 80px;">
-				                </label>
-							</div>
-						</div>
-						<div class="row">
-							<label>Enter Question: <input type="textarea" name="Question"></label>
-						</div>
-
-					</div>
-					</form>
-				</div>
-			</div>
-		</div>
 			<div class="row card">
 			<div class="card-header">
 	            <div class=" row form-inline d-flex justify-content-around">
-	                <label   for="chapter-input">
+	                <label   for="chapter-filter">
 	                  <span class="mr-2">Chapter:</span>
-	                  <input type="number" id="chapter-input" value="1" class="form-control col-3" name="chapter"  >
+	                  <input type="number" id="chapter-filter" value="1" class="form-control col-3" name="chapter-filter"  >
 	                </label>
 
-	                <label  for="Points-input">
+	                <label  for="points-filter">
 	                  <span class="mr-2">Points:</span>
-	                  <input type="number" id="Points-input" class="form-control col-3" name="chapter">
+	                  <input type="number" id="points-filter" class="form-control col-3" name="points-filter">
 	                </label>
 
 	                <label class="custom-control custom-checkbox">
@@ -124,7 +95,56 @@ $query = "SELECT * FROM questions where";
 
         
       </div>
-	</div>
+      <div class="modal fade" id="questionForm" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content container-fluid">
+          <div class="modal-header ">
+            <h4 class="col-12 modal-title text-center">Add Question</h4>
+          </div>
+          <form>
+          <div class="modal-body">
 
+              <div id="chapter-points-input" class="row form-inline d-flex justify-content-around">
+
+                <label for="chapter-input" >
+                            <span class="mr-2">Chapter:</span>
+                            <input type="number" id="chapter-input" value="0" class="form-control" name="chapter-input" style="width: 80px;">
+                        </label>
+
+                        <label  for="points-input" class="">
+                          <span class="mr-2">Points:</span>
+                          <input type="number" id="points-input" value="5" class="form-control" name="points-input" style="width: 80px;">
+                        </label>
+              </div>
+
+            <div id="question-input" class="row form-inline mt-3">
+              <label><span class="mr-2">Enter Question: </span> <textarea class="form-control" name="question" id="question" rows="3" cols="37"></textarea></label>
+            </div>
+
+            <div id="answer-input" class="row mt-3 d-flex justify-content-center">
+              <div class="form-inline">
+              <label for="answer-dropdown"><span class="mr-2">Number of answers to input: </span>
+                <select class="form-control" id="answer-dropdown">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </label>
+              </div>
+            </div>
+
+            <div id="answerFields" class="row mt-2 ml-1">
+            </div>
+
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+	</div>
 </body>
 </html>

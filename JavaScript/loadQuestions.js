@@ -10,9 +10,9 @@ $(document).ready(function(){
 
 
 
-$('#chapter-input').on("input", changeChapter);
+$('#chapter-filter').on("input", changeChapter);
 
-var filter = $('#chapter-input').val();
+var filter = $('#chapter-filter').val();
 
 $.ajax({
 	type: "POST",
@@ -29,7 +29,7 @@ $.ajax({
 
 
 function changeChapter(){
-	var chapter = $('#chapter-input').val();
+	var chapter = $('#chapter-filter').val();
 
 	$.ajax({
 	type: "POST",
