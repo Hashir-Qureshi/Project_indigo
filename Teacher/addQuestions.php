@@ -123,6 +123,7 @@ $query = "SELECT * FROM questions where";
 
               </div>
 
+
             <div id="question-input" class="row form-inline mt-3 ml-4 ">
               <label><span class=" " style="width: 50px;">Question: </span> <textarea  class="form-control offset-md-1" name="question" id="question" rows="3" cols="37"></textarea></label>
             </div>
@@ -149,7 +150,7 @@ $query = "SELECT * FROM questions where";
               </div>
             </div>
 
-            <div id="answerFields" class="row mt-2 ml-1">
+            <div id="answerFields" class="">
             </div>
 
             <div class="modal-footer mt-2">

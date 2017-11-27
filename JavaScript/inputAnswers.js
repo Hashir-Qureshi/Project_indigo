@@ -20,7 +20,7 @@ var i;
 
 	for(i=0; i < list.val() ;i++){
 
-	fields +="<div id='wrongAnswer-"+(i+1)+"' class='row form-inline mt-2'><label><span class='mr-2'>Wrong Answer:</span> <textarea  class='form-control' name='wrongAnswer-"+(i+1)+"' id='wrongAnswer-"+(i+1)+"' rows='3' cols='33'></textarea></label></div>"+
+	fields +="<div id='wrongAnswer-"+(i+1)+"' class='row form-inline mt-2 ml-4'><label><span style='width: 50px;'>Wrong Answer:</span> <textarea  class='form-control offset-md-1' name='wrongAnswer-"+(i+1)+"' id='wrongAnswer-"+(i+1)+"' rows='3' cols='37'></textarea></label></div>"+
 	         "<br>" 
 	}
 
