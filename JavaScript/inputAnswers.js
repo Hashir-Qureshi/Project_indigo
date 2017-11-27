@@ -1,6 +1,9 @@
 $(document).ready(function(){
 
 
+$("#addQuestionModal").on('click', generateFields);
+
+
 var list = $("#answer-dropdown");
 
 list.on('change', generateFields);
@@ -14,9 +17,10 @@ function generateFields(){
 
 var fields = "";
 var i;
+
 	for(i=0; i < list.val() ;i++){
 
-	fields +="<div id='aswerField-"+(i+1)+"' class='row form-inline mt-2'><label><span class='mr-2'>Answer "+(i+1)+": </span> <textarea class='form-control' name='answer-"+(i+1)+"' id='answer-"+(i+1)+"' rows='3' cols='37'></textarea></label></div>"+
+	fields +="<div id='wrongAnswer-"+(i+1)+"' class='row form-inline mt-2'><label><span class='mr-2'>Wrong Answer:</span> <textarea  class='form-control' name='wrongAnswer-"+(i+1)+"' id='wrongAnswer-"+(i+1)+"' rows='3' cols='33'></textarea></label></div>"+
 	         "<br>" 
 	}
 
