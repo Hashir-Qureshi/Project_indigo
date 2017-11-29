@@ -16,7 +16,7 @@ var filter = $('#chapter-filter').val();
 
 $.ajax({
 	type: "POST",
-	url: "loadQuestions.php",
+	url: "AdminScripts/loadQuestions.php",
 	data: {filter: filter},
 	dataType: 'HTML',
 	encode: true
@@ -33,7 +33,7 @@ function changeChapter(){
 
 	$.ajax({
 	type: "POST",
-	url: "loadQuestions.php",
+	url: "AdminScripts/loadQuestions.php",
 	data: {filter: chapter},
 	dataType: 'HTML',
 	encode: true

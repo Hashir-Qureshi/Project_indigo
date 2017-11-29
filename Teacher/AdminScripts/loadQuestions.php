@@ -1,6 +1,6 @@
 <?php 
 
-require_once(dirname(__DIR__).'/config/DB.connection.php');
+require_once('../../config/DB.connection.php');
 
 sleep(1);
 

@@ -35,7 +35,7 @@ $query = "SELECT * FROM questions where";
 
     <script type="text/javascript" src="../JavaScript/loadQuestions.js"></script>
     <script type="text/javascript" src="../JavaScript/inputAnswers.js"></script>
-
+    <script type="text/javascript" src="../JavaScript/postQuestion.js"></script>
       
 </head>
 <body>
@@ -101,7 +101,7 @@ $query = "SELECT * FROM questions where";
           <div class="modal-header " style="border-bottom-style: solid; border-width: 2px; border-color: #6237c4;">
             <h4 class="col-12 modal-title text-center" >Add Question</h4>
           </div>
-          <form>
+          <form id="newQuestionForm" action="">
           <div class="modal-body">
 
               <div id="chapter-points-input" class="row form-inline d-flex justify-content-around">
@@ -124,16 +124,16 @@ $query = "SELECT * FROM questions where";
               </div>
 
 
-            <div id="question-input" class="row form-inline mt-3 ml-4 ">
-              <label><span class=" " style="width: 50px;">Question: </span> <textarea  class="form-control offset-md-1" name="question" id="question" rows="3" cols="37"></textarea></label>
+            <div id="question" class="row form-inline mt-3 ml-4 ">
+              <label><span class=" " style="width: 50px;">Question: </span> <textarea  class="form-control offset-md-1" name="question-text" id="question-text" rows="3" cols="37"></textarea></label>
             </div>
 
-            <div id='correctAnswer' class='row form-inline mt-2 ml-4 '>
-              <label><span class='' style="width: 50px;">Answer:   </span> <textarea class='form-control offset-md-1' name='correctAnswer' id='correctAnswer' rows='3' cols='37'></textarea></label>
+            <div id='correctAnswer-input' class='row form-inline mt-2 ml-4 '>
+              <label><span class='' style="width: 50px;">Answer:   </span> <textarea class='form-control offset-md-1' name='correctAnswer-text' id='correctAnswer-text' rows='3' cols='37'></textarea></label>
             </div>
 
-            <div id='Hint' class='row form-inline mt-2 ml-4 '>
-              <label><span class='' style="display:block; min-width: 50px;">Hint:   </span> <textarea  class='form-control offset-md-1' name='Hint' id='Hint' rows='3' cols='37'></textarea></label>
+            <div id='hint-input' class='row form-inline mt-2 ml-4 '>
+              <label><span class='' style="display:block; min-width: 50px;">Hint:   </span> <textarea  class='form-control offset-md-1' name='hint-text' id='hint-text' rows='3' cols='37'></textarea></label>
             </div>
 
             <hr style="height: 1px;border:none;color:#6237c4;background-color:#6237c4;">
@@ -141,7 +141,7 @@ $query = "SELECT * FROM questions where";
             <div id="answer-input" class="row mt-3 d-flex justify-content-center">
               <div class="form-inline">
               <label for="answer-dropdown" ><span class="mr-2">Number of wrong answers to input: </span>
-                <select  class="form-control" id="answer-dropdown">
+                <select  class="form-control" id="answer-dropdown" name="numAnswers">
                   <option selected="selected">3</option>
                   <option>4</option>
                   <option>5</option>
