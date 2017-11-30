@@ -34,14 +34,15 @@ function displayCourseForm(){
 console.log("in function");
 
 
-var content = "<form action='addCourse.php' id='courseAdd' method = 'post'>"+
+var content = 
+"<div class='card p-2'> <div class='card-block'> <form action='addCourse.php' id='courseAdd' method = 'post' >"+
 
-  "<label for='courseName'>Course Name &nbsp;&nbsp;</label> <input type='text' id='courseName' name='courseName'><br /><br />"+
+  "<label for='courseName'><span class='mr-4'>Course Name: </span><input type='text' id='courseName' name='courseName' class='form-control'></label><br /><br />"+
   
-  "<label for='courseNum'>Course Number</label> <input type='number' id='courseNum' name='courseNum'><br /><br />"+
+  "<label for='courseNum'><span>Course Number:</span><input type='number' id='courseNum' name='courseNum' class='form-control'></label> <br /><br />"+
   
-  "<button type = 'submit' id='submit' name='submit'>Add</button>"+
-  "</form>";
+  "<div class='d-flex justify-content-center'><button type = 'submit' id='submit' class='btn btn-primary' name='submit' class='form-control'>Add</button></div>"+
+  "</form></div></div>";
    
 
 $('.replacer').html(content );
@@ -98,9 +99,10 @@ $.ajax({
 function displayaddCourseButton(){
 
 
+
  var content = "<div class='replacer' align='center'> "+
 
-    "<input type='button' value='Add Course' id='addCourse'> <br/></div>";
+    "<button class='btn btn-primary' value='Add Course' id='addCourse'>Add Course</button><br/></div>";
 
 
 
