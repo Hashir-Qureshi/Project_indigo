@@ -22,6 +22,7 @@ session_start();
   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+ <link href="../css/Header.css" rel="stylesheet">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -35,29 +36,42 @@ session_start();
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
 <body>
+	 <?php include(dirname(__DIR__).'/header.php'); ?>
+	
+ 	<div class="container" style="margin-top: 125px; margin-bottom: 50px;">
 
- 
- 	<div class="wrapper" id="profile"><img src="https://pics.onsizzle.com/astronomeme-my-astronomy-binder-2725677.png"  style="width: 500px;height: 300px;"> 
- 	</div>
+ 		<div class="row d-flex justify-content-center">
 
+ 			<div class="wrapper" id="profile"><img src="https://www.w3schools.com/w3images/fjords.jpg" style="width:250px; height:250px;" class="rounded-circle"> 
+ 			</div>
+
+         </div>
 
   
-  <div class="replacer" align="center"> 
+  <div class="row d-flex justify-content-center" >
 
-  	<input type="button" value="Add Course" id="addCourse"> <br/>
+  	<div class="replacer  mt-4 mb-2"> 
+
+
+  	<button class="btn btn-primary" value="Add Course" id="addCourse">Add Course</button>
+	</div>
+
+
 
   </div>
 
 
-  <div class="courseList" id="courseList">
- 	
 
 
-  </div>
+ <div class="row d-flex justify-content-center">
+  	<div class="courseList" id="courseList">
 
 
+ 	</div>
+ </div>
 
 
+</div>
 
  </body>
 </html>
