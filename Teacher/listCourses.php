@@ -21,13 +21,13 @@ $result = $conn->query($query);
 
 			&nbsp;
 
-		    <a href='addQuestions.php?Course_ID=".$row['Course_ID']."' class='btn btn-primary'>Edit Questions</a> &nbsp;		
+		    <a href='addQuestions.php?Course_ID=".$row['Course_ID']."' class='btn btn-primary disabled'>Edit Questions</a> &nbsp;		
 
-			<a href='addQuestions.php?Course_ID=".$row['Course_ID']."' class='btn btn-primary'>Add Questions </a>&nbsp;
+			<a href='addQuestions.php?Course_ID=".$row['Course_ID']."' class='btn btn-primary '>Add Questions </a>&nbsp;
 
-			<a href='createAssignment.php?Course_ID=".$row['Course_ID']."' class='btn btn-primary'> Create Assignment </a> &nbsp; 
+			<a href='createAssignment.php?Course_ID=".$row['Course_ID']."' class='btn btn-primary disabled'> Create Assignment </a> &nbsp; 
 
-			<a href='vieweditAssignment.php?Course_ID=".$row['Course_ID']."' class='btn btn-primary'>View/Edit Assignments </a> 
+			<a href='vieweditAssignment.php?Course_ID=".$row['Course_ID']."' class='btn btn-primary disabled'>View/Edit Assignments </a> 
 		    
 		</div>	
 	 	</div>
