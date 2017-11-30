@@ -116,10 +116,17 @@ $query = "SELECT * FROM questions where";
                   <input type="number" id="points-input" value="5" class="form-control" name="points-input" style="width: 80px; ">
                 </label>
 
-                <label  for="part-input" class="">
+                <label  for="questionNum-input" class="">
+                  <span class="mr-2">Question #:</span>
+                  <input type="number" id="questionNum-input" value="1" class="form-control" name="questionNum-input" style="width: 80px; ">
+                </label>
+
+                <label  for="part-input" class="mt-3">
                   <span class="mr-2">Part:</span>
                   <input type="number" id="part-input" value="1" class="form-control" name="part-input" style="width: 80px; ">
                 </label>
+
+
 
               </div>
 
