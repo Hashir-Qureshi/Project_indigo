@@ -48,7 +48,7 @@ session_start();
 
  		<div class="row d-flex justify-content-center">
 
- 			<div class="wrapper" id="profile"><img src="https://www.w3schools.com/w3images/fjords.jpg" style="width:250px; height:250px;" class="rounded-circle"> 
+ 			<div class="wrapper" id="profile"><img src="Profile Picture.jpg" style="width:250px; height:250px;" class="rounded-circle"> 
  			</div>
 
          </div>
