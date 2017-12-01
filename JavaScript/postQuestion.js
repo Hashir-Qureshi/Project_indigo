@@ -13,12 +13,13 @@ $(document).ready(function(){
 		}
 
 		var data = {
-				"chapter": 	$('#chapter-input').val() ,
-				"points": 	$('#points-input').val(),
-				"part": 	$('#part-input').val() ,
-				"question": $('#question-text').val(),
-				"answer": 	$('#correctAnswer-text').val(),
-				"hint": 	$('#hint-text').val(),
+				"chapter": 		$('#chapter-input').val() ,
+				"points": 		$('#points-input').val(),
+				"questionNum":  $('#questionNum-input').val(), 
+				"part": 		$('#part-input').val() ,
+				"question": 	$('#question-text').val(),
+				"answer": 		$('#correctAnswer-text').val(),
+				"hint": 		$('#hint-text').val(),
 			"wrongAnswers": wrongAnswers
 		};
 
