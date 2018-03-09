@@ -1,47 +1,48 @@
 $(document).ready(function(){
 
 
-	$('#newQuestionForm').on('submit', function(e){
+    $('#newQuestionForm').on('submit', function(e){
 
-		e.preventDefault();
+        e.preventDefault();
 
-		var wrongAnswers = [];
+        var wrongAnswers = [];
 
-		for (var i = 0; i < $('#answer-dropdown').val(); i++) {
-			
-			wrongAnswers.push($('#wrongAnswer-'+(i+1)+'-text').val());
-		}
+        for (var i = 0; i < $('#answer-dropdown').val(); i++) {
 
-		var data = {
-				"chapter": 	$('#chapter-input').val() ,
-				"points": 	$('#points-input').val(),
-				"part": 	$('#part-input').val() ,
-				"question": $('#question-text').val(),
-				"answer": 	$('#correctAnswer-text').val(),
-				"hint": 	$('#hint-text').val(),
-			"wrongAnswers": wrongAnswers
-		};
+            wrongAnswers.push($('#wrongAnswer-'+(i+1)+'-text').val());
+        }
 
-
-		console.log(data);
+        var data = {
+            "chapter": 		$('#chapter-input').val() ,
+            "points": 		$('#points-input').val(),
+            "questionNum":  $('#questionNum-input').val(), 
+            "part": 		$('#part-input').val() ,
+            "question": 	$('#question-text').val(),
+            "answer": 		$('#correctAnswer-text').val(),
+            "hint": 		$('#hint-text').val(),
+            "wrongAnswers": wrongAnswers
+        };
 
 
-
-			$.ajax({
-				type:'POST',
-				url: 'AdminScripts/postQuestion.php',
-				data: JSON.stringify(data),
-				dataType: 'json',
-				encode: true
-				}).done(function(response){
-
-					console.log(response);
-
-				});
+        console.log(data);
 
 
 
-	});
+        $.ajax({
+            type:'POST',
+            url: 'AdminScripts/postQuestion.php',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            encode: true
+        }).done(function(response){
+
+            console.log(response);
+
+        });
+
+
+
+    });
 
 
 

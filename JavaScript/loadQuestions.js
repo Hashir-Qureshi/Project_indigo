@@ -1,49 +1,82 @@
 $(document).ready(function(){
 
-	$( document ).ajaxStart(function() {
-    $( "#loading" ).css("visibility", "visible");
-});
+    $( document ).ajaxStart(function() {
+        $( "#loading" ).css("visibility", "visible");
+    });
 
-	$( document ).ajaxStop(function() {
-    $( "#loading" ).css("visibility", "hidden");
-});
-
-
-
-$('#chapter-filter').on("input", changeChapter);
-
-var filter = $('#chapter-filter').val();
-
-$.ajax({
-	type: "POST",
-	url: "AdminScripts/loadQuestions.php",
-	data: {filter: filter},
-	dataType: 'HTML',
-	encode: true
-
-}).done(function(response){
-	$('#tableBody').html(response);
-
-});
+    $( document ).ajaxStop(function() {
+        $( "#loading" ).css("visibility", "hidden");
+    });
 
 
 
-function changeChapter(){
-	var chapter = $('#chapter-filter').val();
+    $('#chapter-filter').on("input", filterQuestions);
 
-	$.ajax({
-	type: "POST",
-	url: "AdminScripts/loadQuestions.php",
-	data: {filter: chapter},
-	dataType: 'HTML',
-	encode: true
+    $('#points-filter').on("input", filterQuestions);
 
-}).done(function(response){
-	$('#tableBody').html(response);
+    $('#displayAll').change(function(){
+        if (this.checked) {
+            displayAll();
+        }else{
+            filterQuestions();
+        }
 
-});
+    });
 
-}
+
+    var filter = {"chapter": $('#chapter-filter').val(),
+                  "points": $('#points-filter').val()
+                 };
+
+    console.log(filter);
+    $.ajax({
+        type: "POST",
+        url: "AdminScripts/loadQuestions.php",
+        data: filter,
+        dataType: 'HTML',
+        encode: true
+
+    }).done(function(response){
+        $('#tableBody').html(response);
+
+    });
+
+
+
+    function filterQuestions(){
+        var filter = {"chapter": $('#chapter-filter').val(),
+                      "points": $('#points-filter').val()};
+
+        $.ajax({
+            type: "POST",
+            url: "AdminScripts/loadQuestions.php",
+            data: filter,
+            dataType: 'HTML',
+            encode: true
+
+        }).done(function(response){
+            $('#tableBody').html(response);
+
+        });
+
+    }
+
+    function displayAll(){
+
+        var displayAll = true;
+
+        $.ajax({
+            type: "POST",
+            url: "AdminScripts/loadQuestions.php",
+            data: {filter: displayAll},
+            dataType: 'HTML',
+            encode: true
+
+        }).done(function(response){
+            $('#tableBody').html(response);
+
+        });
+    }
 
 
 });	

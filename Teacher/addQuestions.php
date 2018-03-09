@@ -53,11 +53,11 @@ $query = "SELECT * FROM questions where";
 
 	                <label  for="points-filter">
 	                  <span class="mr-2">Points:</span>
-	                  <input type="number" id="points-filter" class="form-control col-3" name="points-filter" >
+	                  <input type="number" id="points-filter" value="5" class="form-control col-3" name="points-filter" >
 	                </label>
 
 	                <label class="custom-control custom-checkbox">
-	                  <input type="checkbox" class="custom-control-input">
+	                  <input type="checkbox" class="custom-control-input" id="displayAll">
 	                  <span class="custom-control-indicator"></span>
 	                  <span class="custom-control-description">Display All</span>
 	                </label>
