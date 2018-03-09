@@ -1,0 +1,10 @@
+<?php
+class Teacher{
+    
+    private ID, firstName, lastName;
+    
+    
+    
+}
+
+>
