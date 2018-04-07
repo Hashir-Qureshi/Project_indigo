@@ -3,6 +3,40 @@ require 'config/DB.connection.php';
 require 'Student.class.php'; 
 
 
+$query = "select q.question, a.answer from question as q inner join answer as a on q.question_id = 1 and q.question_id = a.question_id and a.correct =1 ;";
+$query .= "select answer from answer where question_id = 1 and correct = 0;";
+
+if ($conn->multi_query($query)) {
+    do {
+        /* store first result set */
+        if ($results = $conn->store_result()) {
+            
+            print_r(extractRows($results, 1));
+        }
+        /* print divider */
+        if ($conn->more_results()) {
+            printf("<br>");
+        }
+    } while ($conn->next_result());
+}
+
+
+function extractRows($results, $num_or_assoc){
+    $rows = array();
+    if($num_or_assoc == 0){
+        while($row = $results->fetch_array(MYSQLI_NUM) ){
+            array_push($rows, $row);
+        }
+
+    }else{
+        while($row = $results->fetch_array(MYSQLI_ASSOC) ){
+            array_push($rows, $row);
+        }
+    }
+
+    return $rows;
+
+}
 
 $student = new Student(2, 'Hashir', 'Qureshi', $conn);
 
