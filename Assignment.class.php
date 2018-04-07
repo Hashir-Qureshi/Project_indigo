@@ -1,53 +1,59 @@
 <?php
 class Assignment{
 
-    private $studentID, $assignmentID, $assignmentName, $maxPoints, $currentQuestion, $correctAnswer, $remainingPoints, $topicIndex, $connection;
+    private $studentID, $id, $maxPoints, $currQuestion, $correctAnswer, $remPoints, $topicIndex, $maxAttempts, $attemptPenalty, $attempt, $connection;
     private $wrongAnswer = array();
     private $topics = array(array());
 
-    //    public $maxQuestions;
-    //    public $quesPerChapter;
-    //    public $chapProgress = array();
-    //    public $chapList = array("test");
-    //    public $index = 0;
-    //    public $usedQuestions = array();
-    //    public $connection;
-    //    public $totalQuestions;
-    //
-    //    public function __construct($maxQuestions, $chapList, $quesPerChapter, $DBconnection){
-    //        $this->maxQuestions = $maxQuestions;
-    //        $this->chapList = $chapList;
-    //        $this->quesPerChapter = $quesPerChapter;
-    //        var_dump($this->chapList);
-    //    }
 
-    public function __construct($studentID, $assignmentID, $assignmentName, $maxPoints, $topics, $DBconnection){
+
+    private function __construct($studentID, $id, $maxPoints, $topics, $maxAttempts, $attemptPenalty, $conn){
+
         $this->studentID = $studentID;
-        $this->assignmentID = $assignmentID;
-        $this->assignmentName = $assignmentName;
+        $this->assignmentID = $id;
         $this->maxPoints = $maxPoints;
         $this->topics = $topics;
-        $this->connection = $DBconnection;
+        $this->connection = $conn;
+        $this->attemptsAllowed = $attemptsAllowed;
+        $this->attemptPenalty = $attemptPenalty;
+        $this->topicIndex = 0;
+        $this->attempt = 0;
+
+
+        $remPoints = $topics[$topicIndex][1];
     }
 
 
+    public static function resumeState($studentID, $id, $maxPoints, $topics, $attempt, $maxAttempts, $attemptPenalty, $currQuestion, $currentTopic, $remPoints, $conn){
+
+        $instance = new self($studentID, $id, $maxPoints, $topics, $maxAttempts, $attemptPenalty, $conn);
+
+        $instance->resumedFill($currQuestion, $currentTopic, $remPoints);
+
+        return $instance;
+    }
+
+    public static function cleanState($studentID, $id, $maxPoints, $topics, $maxAttempts, $attemptPenalty, $conn){
+
+        $instance = new self($studentID, $id, $maxPoints, $topics, $attemptsAllowed, $attemptPenalty, $conn);
+
+        return $instance;
+    }
+
+
+    protected function resumedFill($currQuestion, $currentTopic, $remPoints){
+
+    }
+
 
     public function generateQuestion(){
-        //choose topic to use / decide if resuming or not.
-        $query = "select question_id, assignment_id, student_id from used_questions where assignment_id =".$this->assignmentID." AND student_id =".$this->studentID.";";
+
+
+        $query = "select question_id from used_questions where assignment_id =".$this->id." AND student_id =".$this->studentID.";";
 
         $results = $this->connection->query($query);
 
-        $usedQuestions = extractRows($results);
-
-        if(sizeof($usedQuestion) != 0){
-
-        }else{
-            $this->topicIndex = 0;
-
-            $remainingPoints = $topics[$topicIndex][1];
-
-        }
+        $usedQuestions = extractRows($results,0);
 
 
         $query = "select question_id, points from question where topic=".topics[$this->topicIndex][0].";";
@@ -55,6 +61,7 @@ class Assignment{
         $results = $this->connection->query($query);
 
         $results = extractRows($results,1);
+
 
         $pointsList = array_column($results, "points");
 
@@ -65,43 +72,23 @@ class Assignment{
             $randQuestion = rand(0, sizeof($questionList));
 
 
-        }while( in_array($questionList[$randQuestion], $usedQuestion) || $pointsList[$randQuestion] <= $remainingPoints );
+        }while( in2dArray($questionList[$randQuestion], $usedQuestion) || $pointsList[$randQuestion] > $remPoints );
 
-        $this->currentQuestion = $questionList[$randQuestion]
+        $this->currQuestion = $questionList[$randQuestion];
 
-            saveQuestion($this->currentQuestion);
-
-        $query = "select q.question, a.answer_num, a.answer from question as q inner join answer as a on q.question_id =".$this->currentQuestion." and q.question_id = a.question_id and a.correct =1 limit 1 ;";
-        $query .= "select answer_num, answer from answer where question_id = 1 and correct = 0 limit 3;";
-
-        $QA_set = array(
-            "Question" => "",
-            "Answers" => array()
-        );
-
-        if ($conn->multi_query($query)) {
-            do {
-                /* store first result set */
-                if ($results = $conn->store_result()) {
-                    $results = extractRows($results, 1);
-                    $QA_set[]
-
-                }
-
-            } while ($conn->next_result());
-        }
+        saveQuestion();
 
 
-
-
-
-        //select a random question
+        return getQA_set();
 
 
     }
+    
+    
+    
 
-    private function saveQuestion($questionID){
-        $query = "insert into used_questions (question_id, assignment_id, student_id) values (".$questionID.", ".$assignmentID.", ".$studentID.")";
+    private function saveQuestion(){
+        $query = "insert into used_questions (question_id, assignment_id, student_id) values (".$this->currQuestion.", ".$this->id.", ".$this->studentID.")";
 
         $this->connection->query($query);
 
@@ -109,11 +96,100 @@ class Assignment{
 
     public function checkAnswer($chosenAnswer){
 
+        $attempt++;
+
+        $msg = array("nextQuestion" => ''.
+                     "correct" => '');
+
+        if($chosenAnswer == $this->correctAnswer){
+
+            savePoints(false);
+            $msg["nextQuestion"] = true;
+            $msg["correct"] = true;
+
+        }else{
+
+            if($attempt == $maxAttempts){
+
+                savePoints(true);
+                $msg["nextQuestion"] = true;
+                $msg["correct"] = false;
+
+            }else{
+
+                $msg["nextQuestion"] = false;
+                $msg["correct"] = false;
+                saveAttempt();
+
+            }
+
+        }
+
+        return $msg;
+
     }
 
-    private function savePoints(){
+
+    private function savePoints($applyPenalty){
+        
+        $query = "select points from question where question_id =".$this->currQuestion.";";
+        
+        $points = extractRows($this->connection->query($query), 0);
+        
+        $remPoints -= $points[0];
+        
+        if($applyPenalty){
+        $points[0] = $points[0] - ($points[0] * $attemptPenalty);
+        }
+
+
+        $query = "update used_questions set points_earned =".$points[0].", set attempts=".$this->attempt.", where question_id =".$this->currQuestion." AND assignment_id =".$this->id." AND student_id =".$this->studentID.";";
+
+        $this->connection->query($query);
+    }
+
+    private function saveAttempt(){
+        $query = "update used_questions set attempts=".$this->attempt." where question_id =".$this->currQuestion." AND assignment_id =".$this->id." AND student_id =".$this->studentID.";";
+
+        $this->connection->query($query);
+    }
+
+    public function getQA_set(){
+
+        $query = "select q.question, a.answer_num, a.answer from question as q inner join answer as a on q.question_id =".$this->currQuestion." and q.question_id = a.question_id and a.correct =1 limit 1 ;";
+        $query .= "select answer_num, answer from answer where question_id = 1 and correct = 0 limit 3;";
+
+        $QA_set = array();
+
+        if ($conn->multi_query($query)) {
+            do {
+                /* store first result set */
+                if ($results = $conn->store_result()) {
+                    $results = extractRows($results, 1);
+                    foreach($results as $result){
+                        array_push($QA_set, $result);
+                    }
+
+                }
+
+            } while ($conn->next_result());
+        }
+
+        $this->correctAnswer = $QA_set[0]['answer_num'];
+
+        return $QA_set;
 
     }
+
+    public function isFinished(){
+
+        if($this->topicIndex == sizeof($this->topics) and $this->remPoints == 0){
+            return true;
+        }else return false;
+    }
+
+
+
 
     private function extractRows($results, $num_or_assoc){
         $rows = array();
@@ -132,76 +208,19 @@ class Assignment{
 
     }
 
+    private function in2dArray($value, $arrays){
+        $result = false;
+
+        foreach($arrays as $array){
+            
+            if(in_array($value, $array)){
+                $result = true;
+                break;
+            }
+        }
+        return $result;
+    }
 
 
-
-
-    //    public function generateQuestion(){
-    //
-    //        require_once 'config/config.php';
-    //
-    //        $this->connection = $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-    //
-    //        if(sizeof($this->chapProgress) == $this->quesPerChapter){
-    //            $this->chapProgress = array();
-    //            $this->index++;				
-    //        }		
-    //
-    //        $this->totalQuestions = $this->connection->query("SELECT COUNT(*) FROM ".$this->chapList[$this->index]);
-    //        $this->totalQuestions = $this->totalQuestions->fetch_array(MYSQLI_NUM);
-    //
-    //        do{
-    //            //Choosing a random index between 1 and the number of questions there are in the table. This number will be used to
-    //            //choose a random question from the table and it's associated answer set.
-    //            $Q_ID = rand(1,$this->totalQuestions[0]);
-    //
-    //        }while(in_array($Q_ID, $this->chapProgress));
-    //
-    //        array_push($this->chapProgress, $Q_ID);
-    //
-    //        array_push($this->usedQuestions, $Q_ID);
-    //
-    //
-    //
-    //        $question_Query = "SELECT Question FROM ".$this->chapList[$this->index]." WHERE Q_ID=$Q_ID";
-    //
-    //        $answer_Query = "SELECT Answer,W_Answer_1,W_Answer_2,W_Answer_3 FROM ".$this->chapList[$this->index]." WHERE Q_ID=$Q_ID";
-    //
-    //        $Hint_Query = "SELECT Hint FROM ".$this->chapList[$this->index]." WHERE Q_ID=$Q_ID";
-    //
-    //
-    //
-    //        $question = $this->connection->query($question_Query);
-    //        $question = $question->fetch_array(MYSQLI_NUM);
-    //        $_SESSION{'question'} = $question;
-    //
-    //        $answers = $this->connection->query($answer_Query);
-    //        $answers = $answers->fetch_array(MYSQLI_NUM);
-    //        $_SESSION['answers'] = $answers;
-    //
-    //        $Hint = $this->connection->query($Hint_Query);
-    //        $Hint = $Hint->fetch_array(MYSQLI_NUM);
-    //        $_SESSION{'Hint'} = $Hint;
-    //    }
-    //
-    //    public function getMaxQuestions(){
-    //        return $this->maxQuestions;
-    //    }
-    //
-    //    public function getUsedQuestions(){
-    //        return $this->usedQuestions;
-    //    }
-    //
-    //    public function getChapList(){
-    //        return $this->chapList;
-    //    }
-    //
-    //    public function getCurrentChap(){
-    //        return $this->chapList[$index];
-    //    }
-    //
-    //    public function getQuesPerChapter(){
-    //        return $this->quesPerChapter;
-    //    }
 
 }
