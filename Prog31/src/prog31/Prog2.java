@@ -1,0 +1,23 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package prog31;
+
+/**
+ *
+ * @author Scan05
+ */
+public class Prog2 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        System.out.println("Syed Rehman");
+        System.out.println("Oak Avneue");
+        System.out.println("Flushing, NY 11355");
+    }
+    
+}
