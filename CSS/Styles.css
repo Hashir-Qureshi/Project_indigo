@@ -14,13 +14,13 @@ h4{
 	text-align: center;
 }
 
-.card-body{
+.card-sizing{
 	padding-bottom: 8px;
 	padding-top: 8px;
 	padding-right: 15px; 
 }
 
-.container{
+.structure{
 	padding-left: 50px;
 }
 
@@ -46,5 +46,7 @@ margin-left: 1130px;
 }
 
 .card-img-left{
-	margin-top: 15px;
+	margin-top: -1px;
+	margin-right: -15px; 
+	margin-left: -1px;
 }
