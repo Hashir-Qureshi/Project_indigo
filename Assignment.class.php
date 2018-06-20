@@ -98,9 +98,9 @@ class Assignment{
 
         $attempt++;
 
-        $msg = array("nextQuestion" => ''.
+        $msg = array("nextQuestion" => '',
                      "correct" => '');
-
+  
         if($chosenAnswer == $this->correctAnswer){
 
             savePoints(false);
